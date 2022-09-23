@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  pgadmin:
+    image: "dpage/pgadmin4:latest"
+    ports:
+      - "80:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@adomain.com
+      PGADMIN_DEFAULT_PASSWORD: 1234
+    volumes:
+      - pgadmin-data:/Users/fabiancastano/Documents/GitHub/ReactNativeProjects/Docker_Config_Example/pgadmin
+  postgresql:
+    image: "postgres:12.4"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: test
+      PGDATA: /Users/fabiancastano/Documents/GitHub/ReactNativeProjects/Docker_Config_Example/data
+    volumes:
+      - db-data:/Users/fabiancastano/Documents/GitHub/ReactNativeProjects/Docker_Config_Example/data
+  jupyter:
+    build: ./jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./jupyter:/app
+    entrypoint: jupyter lab --ip='0.0.0.0' --port=8888 --no-browser --allow-root --NotebookApp.token='' --NotebookApp.password=''
+
+volumes:
+  db-data:
+  pgadmin-data:
