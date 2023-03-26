@@ -12,7 +12,7 @@ const char *password = "4D96B7603745";
 
 // Add your MQTT Broker IP address, example:
 // const char* mqtt_server = "192.168.1.144";
-const char *mqtt_server = "192.168.1.7";
+const char *mqtt_server = "mqtt-fabioc9675.b4a.run";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -40,7 +40,7 @@ void setup()
     // (you can also pass in a Wire library object like &Wire2)
     // status = bme.begin();
     setup_wifi();
-    client.setServer(mqtt_server, 1883);
+    client.setServer(mqtt_server, 3000);
     client.setCallback(callback);
 
     pinMode(ledPin, OUTPUT);
