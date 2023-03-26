@@ -12,7 +12,7 @@ const char *password = "4D96B7603745";
 
 // Add your MQTT Broker IP address, example:
 // const char* mqtt_server = "192.168.1.144";
-const char *mqtt_server = "mqtt-fabioc9675.b4a.run";
+const char *mqtt_server = "broker.emqx.io";
 
 WiFiClient espClient;
 PubSubClient client(espClient);
