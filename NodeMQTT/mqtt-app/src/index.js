@@ -6,12 +6,19 @@ const app = express(); // server
 const port = process.env.PORT || 3000;
 const server = require("http").createServer(app);
 
+var respuesta = "";
+
 // Settings
 app.set("port", port); // takes the port provided for the server or other
 
 // Middlewares
 app.use(express.json()); // every data that arrives to the server enters to this and it verifies if the data is a json
 app.use(cors());
+
+app.get("/", (req, res) => {
+    // 200 status code means OK
+    res.send(respuesta);
+});
 
 // Starting the server
 server.listen(app.get("port"), () => {
@@ -42,4 +49,5 @@ client.on("connect", () => {
 });
 client.on("message", (topic, payload) => {
     console.log("Received Message:", topic, payload.toString());
+    respuesta = payload.toString();
 });
