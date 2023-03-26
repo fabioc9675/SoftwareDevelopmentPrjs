@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  image-serving:
+    build: .
+    image: tensorflow/serving
+    container_name: image-serving
+    ports:
+      - 8601:8601
+    volumes:
+      - ./48_tf_serving:/48_tf_serving
+    environment:
+      - TENSORFLOW_SERVING_MODEL_NAME=cocina_model
+    entrypoint:
+      [
+        "bash",
+        "-c",
+        "tensorflow_model_server --rest_api_port=8601 --allow_version_labels_for_unavailable_models --model_config_file=/48_tf_serving/models.config.conf",
+      ]
