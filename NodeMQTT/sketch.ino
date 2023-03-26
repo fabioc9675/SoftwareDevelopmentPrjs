@@ -40,7 +40,7 @@ void setup()
     // (you can also pass in a Wire library object like &Wire2)
     // status = bme.begin();
     setup_wifi();
-    client.setServer(mqtt_server, 3000);
+    client.setServer(mqtt_server, 1883);
     client.setCallback(callback);
 
     pinMode(ledPin, OUTPUT);
