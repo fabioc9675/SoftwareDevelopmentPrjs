@@ -134,12 +134,12 @@ void loop()
     client.loop();
 
     long now = millis();
-    if (now - lastMsg > 5000)
+    if (now - lastMsg > 15000)
     {
         lastMsg = now;
 
         // Temperature in Celsius
-        temperature = 25;
+        temperature = random(4000) / 100.0;
         // Uncomment the next line to set temperature in Fahrenheit
         // (and comment the previous temperature line)
         // temperature = 1.8 * bme.readTemperature() + 32; // Temperature in Fahrenheit
@@ -149,15 +149,16 @@ void loop()
         dtostrf(temperature, 1, 2, tempString);
         Serial.print("Temperature: ");
         Serial.println(tempString);
-        client.publish("esp32/temperature", tempString);
+        String payload = "{\"author\":\"Fabian\", \"varname\":\"Temperature\", \"varvalue\":" + String(tempString) + "}";
+        client.publish("iotUdeA/pipeline", (char *)payload.c_str());
 
-        humidity = 58;
+        // humidity = 100 * esp_random();
 
-        // Convert the value to a char array
-        char humString[8];
-        dtostrf(humidity, 1, 2, humString);
-        Serial.print("Humidity: ");
-        Serial.println(humString);
-        client.publish("esp32/humidity", humString);
+        // // Convert the value to a char array
+        // char humString[8];
+        // dtostrf(humidity, 1, 2, humString);
+        // Serial.print("Humidity: ");
+        // Serial.println(humString);
+        // client.publish("esp32/humidity", humString);
     }
 }
