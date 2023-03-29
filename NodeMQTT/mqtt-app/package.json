@@ -8,7 +8,7 @@
         "server": "nodemon src/index.js",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "dev": "nodemon src/index.js"
+        "dev": "concurrently \"nodemon src/index.js\" \"cd frontend && npm start\""
     },
     "author": "Fabian Castano",
     "license": "ISC",
