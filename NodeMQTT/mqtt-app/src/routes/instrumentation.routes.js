@@ -21,6 +21,7 @@ router.get("/", async (req, res, next) => {
 // ***************************************************************
 
 // Posting data into database  // {'place': 'FABIAN', 'monitor': 1, 'typeDat': 'SAMPLE', 'temp_env': 24.0, 'mois_env': 46.0, 'noise_env': 430.2, 'distance': [17.0, 23.8], 'nPerson': 2}
+// curl -X POST -H "Content-Type: application/json" -d '{"topic": "iotUdeA/pipeline", "author":"Fabian", "varname":"Humidity", "varvalue":89.9}' http://localhost:3000/api/instrumentation
 router.post("/", async (req, res, next) => {
     // make a posting to the database
     const { topic, author, varname, varvalue } = req.body; // create an object from the body of the POST request
