@@ -1,7 +1,8 @@
 // import Schema
 const Instrument = require("../models/instrumentation");
 
-module.exports = (client, mqttTopic, mongoose) => {
+mqtt = (client, mqttTopic, mongoose) => {
+    // MQTT connection
     client.on("connect", () => {
         console.log("Connected to MQTT");
         client.subscribe([mqttTopic], (err) => {
@@ -9,6 +10,10 @@ module.exports = (client, mqttTopic, mongoose) => {
             else console.log("Subscribed to MQTT topic:", mqttTopic);
         });
     });
+
+    // ***************************************************************
+    // ****** Additional mqtt routes *********************************
+    // ***************************************************************
 
     client.on("message", async (topic, payload) => {
         const data = {
@@ -29,3 +34,5 @@ module.exports = (client, mqttTopic, mongoose) => {
             .catch((err) => console.log("Error saving data to MongoDB:", err));
     });
 };
+
+module.exports = mqtt;

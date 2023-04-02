@@ -14,7 +14,7 @@ const connection = mongoose.connection;
 
 // Socket setup
 const server = require("http").createServer(app);
-const io = require("socket.io")(server, {
+const socketClient = require("socket.io")(server, {
     cors: {
         origin: "*",
         credentials: true,
@@ -39,7 +39,7 @@ app.use(express.json()); // every data that arrives to the server enters to this
 // mqtt client connection
 const clientId = `mqtt_${Math.random().toString(16).slice(3)}`;
 const connectUrl = `mqtt://${process.env.MQTT_URI}:${process.env.MQTT_PORT}`;
-const client = mqtt.connect(connectUrl, {
+const mqttClient = mqtt.connect(connectUrl, {
     clientId,
     clean: true,
     connectTimeout: 4000,
@@ -56,10 +56,10 @@ mongoose
 
 // mqtt connection configuration
 const topicData = "iotUdeA/pipeline"; // topic to save data
-require("./routes/instrumentation.mqtt")(client, topicData, mongoose);
+require("./routes/instrumentation.mqtt")(mqttClient, topicData, mongoose);
 
 // websocket connection configuration
-require("./routes/instrumentation.websocket")(io);
+require("./routes/instrumentation.websocket")(socketClient);
 
 // Routes
 app.use("/api/instrumentation", require("./routes/instrumentation.routes")); // adding prefix to the route
@@ -75,7 +75,7 @@ app.get("*", (req, res) => {
 */
 
 // Socket initialization
-io.on("connection", (socket) => {
+socketClient.on("connection", (socket) => {
     console.log("socket.io: User connected: ", socket.id);
 
     socket.on("disconnect", () => {
@@ -101,7 +101,7 @@ connection.once("open", () => {
         switch (change.operationType) {
             case "insert":
                 console.log("data inserted");
-                io.emit(
+                socketClient.emit(
                     "notify",
                     `notification from ${change.fullDocument._id}`
                 );
