@@ -56,7 +56,10 @@ mongoose
 
 // mqtt connection configuration
 const topicData = "iotUdeA/pipeline"; // topic to save data
-require("./routes/instrumentation.client")(client, topicData, mongoose);
+require("./routes/instrumentation.mqtt")(client, topicData, mongoose);
+
+// websocket connection configuration
+require("./routes/instrumentation.websocket")(io);
 
 // Routes
 app.use("/api/instrumentation", require("./routes/instrumentation.routes")); // adding prefix to the route
