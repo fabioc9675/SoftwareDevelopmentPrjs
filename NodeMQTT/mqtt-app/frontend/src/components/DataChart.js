@@ -30,6 +30,10 @@ export default function DataChart(props) {
     const { data } = props;
     const [DataChart, setDataChart] = useState(dataInit);
 
+    var red = Math.round(Math.random() * 255);
+    var gre = Math.round(Math.random() * 255);
+    var blu = Math.round(Math.random() * 255);
+
     // options of the chart component
     useEffect(() => {
         // creation of data temporal array
@@ -50,8 +54,8 @@ export default function DataChart(props) {
                     fill: true,
                     label: name[0],
                     data: d1,
-                    borderColor: "rgb(255, 99, 132)",
-                    backgroundColor: "rgba(255, 99, 132, 0.5)",
+                    borderColor: `rgb(${red}, ${gre}, ${blu})`,
+                    backgroundColor: `rgba(${red}, ${gre}, ${blu}, 0.5)`,
                     yAxisID: "y",
                 },
             ],

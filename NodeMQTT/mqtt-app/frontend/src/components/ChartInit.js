@@ -1,5 +1,9 @@
 // parameters to initialize the chart
 
+var red = Math.round(Math.random() * 255);
+var gre = Math.round(Math.random() * 255);
+var blu = Math.round(Math.random() * 255);
+
 export const options = {
     responsive: true,
     interaction: {
@@ -29,8 +33,8 @@ export const dataInit = {
             fill: true,
             label: "Dataset 1",
             data: [10, 20],
-            borderColor: "rgb(255, 99, 132)",
-            backgroundColor: "rgba(255, 99, 132, 0.3)",
+            borderColor: `rgb(${red}, ${gre}, ${blu})`,
+            backgroundColor: `rgba(${red}, ${gre}, ${blu}, 0.3)`,
             yAxisID: "y",
         },
     ],

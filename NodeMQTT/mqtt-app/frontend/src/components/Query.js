@@ -6,6 +6,7 @@ import moment from "moment";
 import { Card, Container, Navbar } from "react-bootstrap";
 
 import DataChart from "./DataChart";
+import DataTable from "./DataTable";
 
 export default function Query(props) {
     // component props
@@ -133,7 +134,7 @@ export default function Query(props) {
           </div>
         </Container> */}
                 <DataChart data={instrumentObj} />
-                {/* <DataTable data={monitorObj} /> */}
+                <DataTable data={instrumentObj} />
             </Container>
         </div>
     );

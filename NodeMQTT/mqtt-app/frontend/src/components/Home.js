@@ -236,7 +236,7 @@ export default function Home() {
                             </Card>
 
                             <Card style={{ width: "25%" }}>
-                                <Card.Header>Tipo</Card.Header>
+                                <Card.Header>Protocolo</Card.Header>
                                 <Card.Body>
                                     <Form.Select
                                         id="typeSelect"
