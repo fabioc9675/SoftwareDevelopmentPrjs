@@ -11,13 +11,7 @@ function App() {
                 <Router>
                     <Routes>
                         <Route exact path="/" element={<Home />} />
-                        <Route
-                            exact
-                            path="/mqttProtocol"
-                            element={
-                                <Query author="Fabian" subtopic="pipeline" />
-                            }
-                        />
+                        <Route exact path="/mqttProtocol" element={<Query />} />
                     </Routes>
                 </Router>
             </div>

@@ -39,8 +39,8 @@ export default function DataChart(props) {
 
         for (let i = 0; i < data.length; i++) {
             label.push(i);
-            name.push(data[i].value);
-            d1.push(data[i].value);
+            name.push(data[i].varname);
+            d1.push(data[i].varvalue);
         }
 
         const dataSet = {

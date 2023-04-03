@@ -149,7 +149,7 @@ void loop()
         dtostrf(temperature, 1, 2, tempString);
         Serial.print("Temperature: ");
         Serial.println(tempString);
-        String payload = "{\"author\":\"Fabian\", \"varname\":\"Temperature\", \"varvalue\":" + String(tempString) + "}";
+        String payload = "{\"author\":\"Margarita\", \"varname\":\"Temperature\", \"varvalue\":" + String(tempString) + "}";
         client.publish("iotUdeA/pipeline", (char *)payload.c_str());
 
         // humidity = 100 * esp_random();

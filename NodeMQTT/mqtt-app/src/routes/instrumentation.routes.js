@@ -17,18 +17,61 @@ router.get("/", async (req, res, next) => {
 // ***************************************************************
 
 // reading data by author and topic
-router.get("/author/:author/subtopic/:subtopic", async (req, res) => {
+router.get(
+    "/author/:author/subtopic/:subtopic/varname/:varname",
+    async (req, res) => {
+        // make a request to the database
+        // Examples
+        // http://localhost:5000/api/instrumentation/author/Fabian/topic/iotUdeA/pipeline
+        const author = req.params.author;
+        const topic = "iotUdeA/" + req.params.subtopic;
+        const varname = req.params.varname;
+
+        // query to the database
+        const instrumentObj = await Instrument.find({
+            author: author,
+            topic: topic,
+            varname: varname,
+        }).sort({ createdAt: 1 });
+        // response
+        res.json(instrumentObj);
+    }
+);
+
+// reading authors form database
+router.get("/authors", async (req, res) => {
     // make a request to the database
     // Examples
-    // http://localhost:5000/api/instrumentation/author/Fabian/topic/iotUdeA/pipeline
-    const author = req.params.author;
-    const topic = "iotUdeA/" + req.params.subtopic;
+    // http://localhost:5000/api/instrumentation/authors
+    const instrumentObj = await Instrument.distinct("author");
+    // response
+    res.json(instrumentObj);
+});
 
-    // query to the database
-    const instrumentObj = await Instrument.find({
+// reading authors form database
+router.get("/author/:author/topics", async (req, res) => {
+    // make a request to the database
+    // Examples
+    // http://localhost:5000/api/instrumentation/authors
+    const author = req.params.author;
+    const instrumentObj = await Instrument.distinct("topic", {
+        author: author,
+    });
+    // response
+    res.json(instrumentObj);
+});
+
+// reading authors form database
+router.get("/author/:author/topic/:topic/varnames", async (req, res) => {
+    // make a request to the database
+    // Examples
+    // http://localhost:5000/api/instrumentation/authors
+    const author = req.params.author;
+    const topic = "iotUdeA/" + req.params.topic;
+    const instrumentObj = await Instrument.distinct("varname", {
         author: author,
         topic: topic,
-    }).sort({ createdAt: 1 });
+    });
     // response
     res.json(instrumentObj);
 });
