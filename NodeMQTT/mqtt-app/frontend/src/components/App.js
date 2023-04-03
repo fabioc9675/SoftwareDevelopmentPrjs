@@ -3,6 +3,7 @@ import Home from "./Home";
 import Query from "./Query";
 
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
+import Stream from "./Stream";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                             path="/webserverProtocol"
                             element={<Query />}
                         />
+                        <Route exact path="/mqttStream" element={<Stream />} />
                     </Routes>
                 </Router>
             </div>

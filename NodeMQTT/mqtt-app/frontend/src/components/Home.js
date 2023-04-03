@@ -160,6 +160,14 @@ export default function Home() {
                 },
             });
         }
+
+        // move to WebServer frontend
+        if (e.target.id === "mqttStream") {
+            // setImprimir("Protocolo WebServer");
+            navigate("/mqttStream", {
+                state: {},
+            });
+        }
     }
 
     return (
