@@ -18,17 +18,19 @@ router.get("/", async (req, res, next) => {
 
 // reading data by author and topic
 router.get(
-    "/author/:author/subtopic/:subtopic/varname/:varname",
+    "/author/:author/type/:type/subtopic/:subtopic/varname/:varname",
     async (req, res) => {
         // make a request to the database
         // Examples
         // http://localhost:5000/api/instrumentation/author/Fabian/topic/iotUdeA/pipeline
         const author = req.params.author;
+        const type = req.params.type;
         const topic = "iotUdeA/" + req.params.subtopic;
         const varname = req.params.varname;
 
         // query to the database
         const instrumentObj = await Instrument.find({
+            type: type,
             author: author,
             topic: topic,
             varname: varname,
@@ -49,12 +51,12 @@ router.get("/authors", async (req, res) => {
 });
 
 // reading authors form database
-router.get("/author/:author/topics", async (req, res) => {
+router.get("/author/:author/types", async (req, res) => {
     // make a request to the database
     // Examples
     // http://localhost:5000/api/instrumentation/authors
     const author = req.params.author;
-    const instrumentObj = await Instrument.distinct("topic", {
+    const instrumentObj = await Instrument.distinct("type", {
         author: author,
     });
     // response
@@ -62,30 +64,51 @@ router.get("/author/:author/topics", async (req, res) => {
 });
 
 // reading authors form database
-router.get("/author/:author/topic/:topic/varnames", async (req, res) => {
+router.get("/author/:author/type/:type/topics", async (req, res) => {
     // make a request to the database
     // Examples
     // http://localhost:5000/api/instrumentation/authors
     const author = req.params.author;
-    const topic = "iotUdeA/" + req.params.topic;
-    const instrumentObj = await Instrument.distinct("varname", {
+    const type = req.params.type;
+    const instrumentObj = await Instrument.distinct("topic", {
         author: author,
-        topic: topic,
+        type: type,
     });
     // response
     res.json(instrumentObj);
 });
+
+// reading authors form database
+router.get(
+    "/author/:author/type/:type/topic/:topic/varnames",
+    async (req, res) => {
+        // make a request to the database
+        // Examples
+        // http://localhost:5000/api/instrumentation/authors
+        const author = req.params.author;
+        const type = req.params.type;
+        const topic = "iotUdeA/" + req.params.topic;
+        const instrumentObj = await Instrument.distinct("varname", {
+            author: author,
+            topic: topic,
+            type: type,
+        });
+        // response
+        res.json(instrumentObj);
+    }
+);
 
 // ***************************************************************
 // ****** Additional routes to post data *************************
 // ***************************************************************
 
 // Posting data into database  // {'place': 'FABIAN', 'monitor': 1, 'typeDat': 'SAMPLE', 'temp_env': 24.0, 'mois_env': 46.0, 'noise_env': 430.2, 'distance': [17.0, 23.8], 'nPerson': 2}
-// curl -X POST -H "Content-Type: application/json" -d '{"topic": "iotUdeA/pipeline", "author":"Fabian", "varname":"Humidity", "varvalue":89.9}' http://localhost:3000/api/instrumentation
+// curl -X POST -H "Content-Type: application/json" -d '{"type": "webserver", "topic": "iotUdeA/pipeline", "author":"Fabian", "varname":"Humidity", "varvalue":89.9}' http://localhost:3000/api/instrumentation
 router.post("/", async (req, res, next) => {
     // make a posting to the database
-    const { topic, author, varname, varvalue } = req.body; // create an object from the body of the POST request
+    const { type, topic, author, varname, varvalue } = req.body; // create an object from the body of the POST request
     const instrumentObj = new Instrument({
+        type,
         topic,
         author,
         varname,
@@ -100,8 +123,9 @@ router.post("/", async (req, res, next) => {
 // Updating data into the database
 router.put("/id/:id", async (req, res, next) => {
     // make an update into the database
-    const { topic, author, varname, varvalue } = req.body; // create an object from the body of the POST request
+    const { type, topic, author, varname, varvalue } = req.body; // create an object from the body of the POST request
     const instrumentObj = {
+        type,
         topic,
         author,
         varname,

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { Container, Nav, Navbar, Form, Card } from "react-bootstrap";
 
 import { axiosInstance } from "../config/config";
+import Query from "./Query";
 
 export default function Home() {
     // URL history
@@ -11,6 +12,8 @@ export default function Home() {
     // useState
     const [authors, setAuthors] = useState([]);
     const [author, setAuthor] = useState("");
+    const [types, setTypes] = useState([]);
+    const [type, setType] = useState("");
     const [topics, setTopics] = useState([]);
     const [topic, setTopic] = useState("");
     const [varnames, setVarnames] = useState([]);
@@ -23,15 +26,21 @@ export default function Home() {
 
     useEffect(() => {
         if (author !== "") {
-            loadTopicsFromDB();
+            loadTypesFromDB();
         }
     }, [author]);
 
     useEffect(() => {
-        if ((author !== "") & (topic !== "")) {
+        if ((author !== "") & (type !== "")) {
+            loadTopicsFromDB();
+        }
+    }, [author, type]);
+
+    useEffect(() => {
+        if ((author !== "") & (type !== "") & (topic !== "")) {
             loadVarnameFromDB();
         }
-    }, [author, topic]);
+    }, [author, type, topic]);
 
     // load authors from database
     function loadAuthorsFromDB() {
@@ -46,9 +55,21 @@ export default function Home() {
     }
 
     // load authors from database
+    function loadTypesFromDB() {
+        axiosInstance
+            .get(`/api/instrumentation/author/${author}/types`)
+            .then((res) => {
+                console.log(res.data);
+                setTypes(res.data);
+                setType(res.data[0]);
+            })
+            .catch((err) => console.error(err));
+    }
+
+    // load authors from database
     function loadTopicsFromDB() {
         axiosInstance
-            .get(`/api/instrumentation/author/${author}/topics`)
+            .get(`/api/instrumentation/author/${author}/type/${type}/topics`)
             .then((res) => {
                 console.log(res.data);
                 var text = res.data;
@@ -65,7 +86,7 @@ export default function Home() {
     function loadVarnameFromDB() {
         axiosInstance
             .get(
-                `/api/instrumentation/author/${author}/topic/${topic}/varnames`
+                `/api/instrumentation/author/${author}/type/${type}/topic/${topic}/varnames`
             )
             .then((res) => {
                 console.log(res.data);
@@ -81,6 +102,10 @@ export default function Home() {
         if (e.target.id === "authorSelect") {
             console.log(e.target.value);
             setAuthor(e.target.value);
+        }
+        if (e.target.id === "typeSelect") {
+            console.log(e.target.value);
+            setType(e.target.value);
         }
         if (e.target.id === "topicSelect") {
             console.log(e.target.value);
@@ -99,9 +124,10 @@ export default function Home() {
             // setImprimir("Protocolo MQTT");
             navigate("/mqttProtocol", {
                 state: {
-                    author: "Fabian",
-                    subtopic: "pipeline",
-                    varname: "Humidity",
+                    type: type,
+                    author: author,
+                    subtopic: topic,
+                    varname: varname,
                     title: "Eventos MQTT",
                 },
             });
@@ -110,13 +136,29 @@ export default function Home() {
         // move to WebSocket frontend
         if (e.target.id === "socket") {
             // setImprimir("Protocolo WebSocket");
-            navigate("/websocketProtocol");
+            navigate("/websocketProtocol", {
+                state: {
+                    type: type,
+                    author: author,
+                    subtopic: topic,
+                    varname: varname,
+                    title: "Eventos WebSocket",
+                },
+            });
         }
 
         // move to WebServer frontend
         if (e.target.id === "server") {
             // setImprimir("Protocolo WebServer");
-            navigate("/webserverProtocol");
+            navigate("/webserverProtocol", {
+                state: {
+                    type: type,
+                    author: author,
+                    subtopic: topic,
+                    varname: varname,
+                    title: "Eventos WebServer",
+                },
+            });
         }
     }
 
@@ -128,28 +170,37 @@ export default function Home() {
                         <Navbar.Brand href="/">Semillero GIBIC</Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Nav className="me-auto">
-                            <Nav.Link id="mqtt" onClick={(e) => HandleClick(e)}>
-                                Protocolo MQTT
-                            </Nav.Link>
-                            <Nav.Link
-                                id="socket"
-                                onClick={(e) => HandleClick(e)}
-                            >
-                                Protocolo WebSocket
-                            </Nav.Link>
-                            <Nav.Link
-                                id="server"
-                                onClick={(e) => HandleClick(e)}
-                            >
-                                Protocolo WebServer
-                            </Nav.Link>
+                            {type === "mqtt" && (
+                                <Nav.Link
+                                    id="mqtt"
+                                    onClick={(e) => HandleClick(e)}
+                                >
+                                    Protocolo MQTT
+                                </Nav.Link>
+                            )}
+                            {type === "websocket" && (
+                                <Nav.Link
+                                    id="socket"
+                                    onClick={(e) => HandleClick(e)}
+                                >
+                                    Protocolo WebSocket
+                                </Nav.Link>
+                            )}
+                            {type === "webserver" && (
+                                <Nav.Link
+                                    id="server"
+                                    onClick={(e) => HandleClick(e)}
+                                >
+                                    Protocolo WebServer
+                                </Nav.Link>
+                            )}
                         </Nav>
                         <Navbar.Collapse className="justify-content-end">
                             <Navbar.Text>
                                 Powered by:{" "}
                                 <a href="https://github.com/fabioc9675">
                                     Fabian Castaño
-                                </a>
+                                </a>{" "}
                                 -{" "}
                                 <a href="https://github.com/jongalon">
                                     Jonathan Gallego
@@ -164,7 +215,7 @@ export default function Home() {
                 <div>
                     <Container className="p-5 mb-4 bg-light rounded-3">
                         <div className="d-flex flex-row">
-                            <Card style={{ width: "33%" }}>
+                            <Card style={{ width: "25%" }}>
                                 <Card.Header>Autor</Card.Header>
                                 <Card.Body>
                                     <Form.Select
@@ -184,7 +235,27 @@ export default function Home() {
                                 </Card.Body>
                             </Card>
 
-                            <Card style={{ width: "33%" }}>
+                            <Card style={{ width: "25%" }}>
+                                <Card.Header>Tipo</Card.Header>
+                                <Card.Body>
+                                    <Form.Select
+                                        id="typeSelect"
+                                        onChange={(e) => {
+                                            onChangeHandle(e);
+                                        }}
+                                    >
+                                        {types.map((values) => {
+                                            return (
+                                                <option value={values}>
+                                                    {values}
+                                                </option>
+                                            );
+                                        })}
+                                    </Form.Select>
+                                </Card.Body>
+                            </Card>
+
+                            <Card style={{ width: "25%" }}>
                                 <Card.Header>Tópico</Card.Header>
                                 <Card.Body>
                                     <Form.Select
@@ -204,7 +275,7 @@ export default function Home() {
                                 </Card.Body>
                             </Card>
 
-                            <Card style={{ width: "33%" }}>
+                            <Card style={{ width: "25%" }}>
                                 <Card.Header>Variable</Card.Header>
                                 <Card.Body>
                                     <Form.Select

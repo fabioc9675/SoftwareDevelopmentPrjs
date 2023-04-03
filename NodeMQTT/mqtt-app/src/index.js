@@ -94,7 +94,7 @@ connection.once("open", () => {
 
     // Setting change streams in the database
     console.log("Setting change streaming");
-    const monitoringChangeStream = connection.collection("monitors").watch();
+    const monitoringChangeStream = connection.collection("instruments").watch();
 
     // Handle the event on change
     monitoringChangeStream.on("change", (change) => {

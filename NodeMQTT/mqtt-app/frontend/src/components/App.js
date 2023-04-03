@@ -12,6 +12,16 @@ function App() {
                     <Routes>
                         <Route exact path="/" element={<Home />} />
                         <Route exact path="/mqttProtocol" element={<Query />} />
+                        <Route
+                            exact
+                            path="/websocketProtocol"
+                            element={<Query />}
+                        />
+                        <Route
+                            exact
+                            path="/webserverProtocol"
+                            element={<Query />}
+                        />
                     </Routes>
                 </Router>
             </div>

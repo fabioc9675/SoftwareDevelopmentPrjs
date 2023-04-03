@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 // data schema to save data into the database
 const InstrumentSchema = new Schema(
     {
+        type: { type: String, required: true },
         topic: { type: String, required: true },
         author: { type: String, required: true },
         varname: { type: String, required: true },

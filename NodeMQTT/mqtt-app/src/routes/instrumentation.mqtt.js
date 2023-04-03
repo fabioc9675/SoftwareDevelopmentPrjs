@@ -22,6 +22,7 @@ mqtt = (client, mqttTopic, mongoose) => {
         };
 
         const instrumentObj = new Instrument({
+            type: "mqtt",
             topic: data.topic,
             author: data.message.author,
             varname: data.message.varname,

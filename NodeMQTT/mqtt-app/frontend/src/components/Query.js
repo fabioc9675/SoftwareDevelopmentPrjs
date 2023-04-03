@@ -10,7 +10,7 @@ import DataChart from "./DataChart";
 export default function Query(props) {
     // component props
     const location = useLocation();
-    const { author, subtopic, varname, title } = location.state;
+    const { author, type, subtopic, varname, title } = location.state;
 
     // Hooks of data
     const [data, setData] = useState("Hello Fabian!");
@@ -18,6 +18,7 @@ export default function Query(props) {
         {
             _id: 1,
             hour: 0,
+            type: "",
             topic: "",
             author: "",
             varname: "",
@@ -29,6 +30,26 @@ export default function Query(props) {
     const navigate = useNavigate();
 
     // it is to do something  when application load
+    // it is to do something when application load
+    useEffect(() => {
+        // load tensorflow model
+        // tf.ready().then(() => {
+        //   loadModel(url);
+        // });
+
+        // create the socket in the client
+        const socket = io(axiosInstance.getUri(), {
+            transports: ["websocket"],
+        });
+        // initialization of socket io in the client side
+        socket.on("notify", (message) => {
+            console.log(message);
+            loadDataFromDB();
+        });
+
+        // loadDataFromDB();
+    }, []);
+
     useEffect(() => {
         loadDataFromDB();
     }, []);
@@ -37,7 +58,7 @@ export default function Query(props) {
     function loadDataFromDB() {
         axiosInstance
             .get(
-                `/api/instrumentation/author/${author}/subtopic/${subtopic}/varname/${varname}`
+                `/api/instrumentation/author/${author}/type/${type}/subtopic/${subtopic}/varname/${varname}`
             )
             .then((res) => {
                 console.log(res.data);
@@ -75,7 +96,7 @@ export default function Query(props) {
                             Powered by:{" "}
                             <a href="https://github.com/fabioc9675">
                                 Fabian Castaño
-                            </a>
+                            </a>{" "}
                             -{" "}
                             <a href="https://github.com/jongalon">
                                 Jonathan Gallego

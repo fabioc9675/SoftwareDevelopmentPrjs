@@ -15,7 +15,7 @@ unsigned long lastTime = 0;
 // Timer set to 10 minutes (600000)
 // unsigned long timerDelay = 600000;
 // Set timer to 5 seconds (5000)
-unsigned long timerDelay = 30000;
+unsigned long timerDelay = 5000;
 
 void setup()
 {
@@ -71,7 +71,7 @@ void loop()
             // Specify content-type header
             http.addHeader("Content-Type", "application/json");
             // Data to send with HTTP POST
-            String httpRequestData = "{\"topic\": \"iotUdeA/webPost\", \"author\":\"Fabian\", \"varname\":\"Humidity\", \"varvalue\":" + String(random(10000) / 100.0) + "}";
+            String httpRequestData = "{\"topic\": \"iotUdeA/webPost\", \"author\":\"Margarita\", \"type\":\"webserver\", \"varname\":\"Temperature\", \"varvalue\":" + String(random(10000) / 100.0) + "}";
             // Send HTTP POST request
             int httpResponseCode = http.POST(httpRequestData);
 

@@ -138,7 +138,7 @@ void loop()
 
     uint64_t now = millis();
 
-    if (now - messageTimestamp > 2000)
+    if (now - messageTimestamp > 5000)
     {
         messageTimestamp = now;
 
@@ -148,11 +148,13 @@ void loop()
 
         // add evnet name
         // Hint: socket.on('event_name', ....
-        array.add("event_name");
+        array.add("socketData");
 
         // add payload (parameters) for the event
         JsonObject param1 = array.createNestedObject();
-        param1["now"] = (uint32_t)now;
+        param1["author"] = "Felipe";
+        param1["varname"] = "Temperature";
+        param1["varvalue"] = random(400) / 10.0;
 
         // JSON to String (serializion)
         String output;
