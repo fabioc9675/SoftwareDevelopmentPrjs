@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router";
 import { Container, Nav, Navbar } from "react-bootstrap";
 
@@ -7,23 +7,26 @@ export default function Home() {
     const navigate = useNavigate();
 
     // useState
-    const [imprimir, setImprimir] = useState("");
+    // const [imprimir, setImprimir] = useState("");
 
     // function to handle click
     function HandleClick(e) {
         // move to MQTT frontend
         if (e.target.id === "mqtt") {
-            setImprimir("Protocolo MQTT");
+            // setImprimir("Protocolo MQTT");
+            navigate("/mqttProtocol");
         }
 
         // move to WebSocket frontend
         if (e.target.id === "socket") {
-            setImprimir("Protocolo WebSocket");
+            // setImprimir("Protocolo WebSocket");
+            navigate("/websocketProtocol");
         }
 
         // move to WebServer frontend
         if (e.target.id === "server") {
-            setImprimir("Protocolo WebServer");
+            // setImprimir("Protocolo WebServer");
+            navigate("/webserverProtocol");
         }
     }
 
@@ -44,10 +47,22 @@ export default function Home() {
                             Protocolo WebServer
                         </Nav.Link>
                     </Nav>
+                    <Navbar.Collapse className="justify-content-end">
+                        <Navbar.Text>
+                            Powered by:{" "}
+                            <a href="https://github.com/fabioc9675">
+                                Fabian Castaño
+                            </a>
+                            -{" "}
+                            <a href="https://github.com/jongalon">
+                                Jonathan Gallego
+                            </a>
+                        </Navbar.Text>
+                    </Navbar.Collapse>
                 </Container>
             </Navbar>
 
-            <div>{imprimir}</div>
+            {/* <div>{imprimir}</div> */}
         </div>
     );
 }

@@ -16,6 +16,23 @@ router.get("/", async (req, res, next) => {
 // ****** Additional routes to get data **************************
 // ***************************************************************
 
+// reading data by author and topic
+router.get("/author/:author/subtopic/:subtopic", async (req, res) => {
+    // make a request to the database
+    // Examples
+    // http://localhost:5000/api/instrumentation/author/Fabian/topic/iotUdeA/pipeline
+    const author = req.params.author;
+    const topic = "iotUdeA/" + req.params.subtopic;
+
+    // query to the database
+    const instrumentObj = await Instrument.find({
+        author: author,
+        topic: topic,
+    }).sort({ createdAt: 1 });
+    // response
+    res.json(instrumentObj);
+});
+
 // ***************************************************************
 // ****** Additional routes to post data *************************
 // ***************************************************************

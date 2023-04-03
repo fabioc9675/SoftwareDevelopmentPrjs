@@ -1,5 +1,6 @@
 import React from "react";
 import Home from "./Home";
+import Query from "./Query";
 
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -10,6 +11,13 @@ function App() {
                 <Router>
                     <Routes>
                         <Route exact path="/" element={<Home />} />
+                        <Route
+                            exact
+                            path="/mqttProtocol"
+                            element={
+                                <Query author="Fabian" subtopic="pipeline" />
+                            }
+                        />
                     </Routes>
                 </Router>
             </div>
