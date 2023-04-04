@@ -86,7 +86,7 @@ void callback(char *topic, byte *message, unsigned int length)
 
     // If a message is received on the topic esp32/output, you check if the message is either "on" or "off".
     // Changes the output state according to the message
-    if (String(topic) == "esp32/output")
+    if (String(topic) == "iotUdeA/output")
     {
         Serial.print("Changing output to ");
         if (messageTemp == "on")
@@ -113,7 +113,7 @@ void reconnect()
         {
             Serial.println("connected");
             // Subscribe
-            client.subscribe("esp32/output");
+            client.subscribe("iotUdeA/output");
         }
         else
         {
@@ -134,12 +134,12 @@ void loop()
     client.loop();
 
     long now = millis();
-    if (now - lastMsg > 15000)
+    if (now - lastMsg > 2000)
     {
         lastMsg = now;
 
         // Temperature in Celsius
-        temperature = random(4000) / 100.0;
+        temperature = 40 * sin(0.03 * 3.146 * millis() / 1000);
         // Uncomment the next line to set temperature in Fahrenheit
         // (and comment the previous temperature line)
         // temperature = 1.8 * bme.readTemperature() + 32; // Temperature in Fahrenheit
@@ -149,8 +149,8 @@ void loop()
         dtostrf(temperature, 1, 2, tempString);
         Serial.print("Temperature: ");
         Serial.println(tempString);
-        String payload = "{\"author\":\"Felipe\", \"varname\":\"AirQ\", \"varvalue\":" + String(tempString) + "}";
-        client.publish("iotUdeA/pipeline", (char *)payload.c_str());
+        String payload = "{\"author\":\"Bernardo\", \"varname\":\"AirQ\", \"varvalue\":" + String(tempString) + "}";
+        client.publish("iotUdeA/prueba", (char *)payload.c_str());
 
         // humidity = 100 * esp_random();
 
