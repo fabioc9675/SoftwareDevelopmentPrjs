@@ -5,7 +5,7 @@ WORKDIR /root/app
 COPY package.json ./
 COPY frontend/build/ ./
 COPY src/ ./
-COPY .env ./
+#COPY .env ./
 
 RUN npm install 
 #RUN cd frontend && npm install
