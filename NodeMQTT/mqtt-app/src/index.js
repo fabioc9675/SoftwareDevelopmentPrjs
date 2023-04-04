@@ -39,7 +39,8 @@ app.use(express.json()); // every data that arrives to the server enters to this
 // mqtt client connection
 const clientId = `mqtt_${Math.random().toString(16).slice(3)}`;
 // const connectUrl = `mqtt://${process.env.MQTT_URI}:${process.env.MQTT_PORT}`; // to use TCP MQTT, port 1883, Url: broker.emqx.io
-const connectUrl = `ws://${process.env.REACT_APP_MQTT_URI}:${process.env.REACT_APP_MQTT_PORT}/mqtt`; // to use WS MQTT, port 8083, Url: broker.emqx.io
+// const connectUrl = `ws://${process.env.REACT_APP_MQTT_URI}:${process.env.REACT_APP_MQTT_PORT}/mqtt`; // to use WS MQTT, port 8083, Url: broker.emqx.io
+const connectUrl = `wss://${process.env.REACT_APP_MQTT_URI}:${process.env.REACT_APP_MQTT_PORT}/mqtt`; // to use secure WS MQTT, port 8084, Url: broker.emqx.io
 const mqttClient = mqtt.connect(connectUrl, {
     clientId,
     clean: true,

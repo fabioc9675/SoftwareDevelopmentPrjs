@@ -18,7 +18,7 @@ export default function StreamMqtt() {
 
     // cliente mqtt
     const clientId = `mqtt_${Math.random().toString(16).slice(3)}`;
-    const connectUrl = `ws://broker.emqx.io:8083/mqtt`;
+    const connectUrl = `wss://broker.emqx.io:8084/mqtt`;
     const client = mqtt.connect(connectUrl, {
         clientId,
         clean: true,
