@@ -34,6 +34,20 @@
 -   `npm install react-icons --save` Icons https://react-icons.github.io/react-icons/
 -   `npm install @tensorflow/tfjs` to load tensorflow models
 
+### frontend mqtt 
+
+https://www.npmjs.com/package/precompiled-mqtt
+
+npm install -g webpack                    // Install webpack globally
+npm install mqtt                          // Install MQTT library
+cd node_modules/mqtt
+npm install .                             // Install dev deps at current dir
+webpack mqtt.js --output-library mqtt     // Build
+
+o
+
+npm i precompiled-mqtt
+
 ## Steps
 
 1. Setting up the Application

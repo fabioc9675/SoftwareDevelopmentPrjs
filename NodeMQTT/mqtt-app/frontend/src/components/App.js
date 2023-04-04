@@ -1,9 +1,9 @@
 import React from "react";
 import Home from "./Home";
 import Query from "./Query";
+import StreamMqtt from "./StreamMqtt";
 
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
-import Stream from "./Stream";
 
 function App() {
     return (
@@ -23,7 +23,11 @@ function App() {
                             path="/webserverProtocol"
                             element={<Query />}
                         />
-                        <Route exact path="/mqttStream" element={<Stream />} />
+                        <Route
+                            exact
+                            path="/mqttStream"
+                            element={<StreamMqtt />}
+                        />
                     </Routes>
                 </Router>
             </div>

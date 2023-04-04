@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import { useLocation, useNavigate } from "react-router";
 import { axiosInstance } from "../config/config";
 import moment from "moment";
-import { Card, Container, Navbar } from "react-bootstrap";
+import { Container, Navbar } from "react-bootstrap";
 
 import DataChart from "./DataChart";
 import DataTable from "./DataTable";

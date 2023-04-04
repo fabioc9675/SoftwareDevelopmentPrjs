@@ -3,7 +3,6 @@ import { useNavigate } from "react-router";
 import { Container, Nav, Navbar, Form, Card } from "react-bootstrap";
 
 import { axiosInstance } from "../config/config";
-import Query from "./Query";
 
 export default function Home() {
     // URL history
@@ -164,9 +163,7 @@ export default function Home() {
         // move to WebServer frontend
         if (e.target.id === "mqttStream") {
             // setImprimir("Protocolo WebServer");
-            navigate("/mqttStream", {
-                state: {},
-            });
+            navigate("/mqttStream");
         }
     }
 
@@ -202,6 +199,12 @@ export default function Home() {
                                     Protocolo WebServer
                                 </Nav.Link>
                             )}
+                            <Nav.Link
+                                id="mqttStream"
+                                onClick={(e) => HandleClick(e)}
+                            >
+                                MQTT Streaming
+                            </Nav.Link>
                         </Nav>
                         <Navbar.Collapse className="justify-content-end">
                             <Navbar.Text>
