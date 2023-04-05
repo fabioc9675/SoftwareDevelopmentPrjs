@@ -6,8 +6,10 @@ export default function DataTable(props) {
     const { data } = props;
     return (
         <div className="container">
-            <h4>Tabla de datos</h4>
-            <div className="grey lighten-4">
+            <div className="container p-5">
+                <h2>Tabla de datos</h2>
+            </div>
+            <div className="container grey lighten-4">
                 <Table responsive striped bordered hover variant="dark">
                     <thead>
                         <tr>

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, Container, Navbar, Form } from "react-bootstrap";
 import { useNavigate } from "react-router";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import mqtt from "precompiled-mqtt";
 import DataChart from "./DataChart";
@@ -160,6 +162,20 @@ export default function StreamMqtt() {
 
             <Container className="p-5 ">
                 <DataChart data={instrumentObj} />
+            </Container>
+
+            <Container className="p-5 mb-4 rounded-3 shadow-lg bg-transparent">
+                <div className="d-flex flex-column">
+                    <h2>Estructura de datos</h2>
+                    <p>Tópico = iotUdeA/example</p>
+                    <SyntaxHighlighter language="json" style={darcula}>
+                        {`{
+    "author":"Nombre", 
+    "varname":"Variable",
+    "varvalue":Valor
+}`}
+                    </SyntaxHighlighter>
+                </div>
             </Container>
 
             <div>
