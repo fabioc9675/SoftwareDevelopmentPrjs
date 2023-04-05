@@ -15,6 +15,12 @@ export const options = {
         title: {
             display: true,
             text: "Gráfica de datos",
+            color: "white",
+        },
+        legend: {
+            labels: {
+                color: "white",
+            },
         },
     },
     scales: {
@@ -22,6 +28,24 @@ export const options = {
             type: "linear",
             display: true,
             position: "left",
+            color: "white",
+            grid: { color: "white" },
+            border: {
+                color: "white",
+            },
+            ticks: { color: "white" },
+        },
+
+        x: {
+            //type: "linear",
+            display: true,
+            //position: "left",
+            color: "white",
+            grid: { color: "white" },
+            border: {
+                color: "white",
+            },
+            ticks: { color: "white" },
         },
     },
 };
@@ -36,6 +60,7 @@ export const dataInit = {
             borderColor: `rgb(${red}, ${gre}, ${blu})`,
             backgroundColor: `rgba(${red}, ${gre}, ${blu}, 0.3)`,
             yAxisID: "y",
+            color: "white",
         },
     ],
 };

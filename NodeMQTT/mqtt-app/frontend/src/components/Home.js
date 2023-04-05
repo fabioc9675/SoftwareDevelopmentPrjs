@@ -172,7 +172,17 @@ export default function Home() {
             <div>
                 <Navbar bg="light">
                     <Container>
-                        <Navbar.Brand href="/">Semillero GIBIC</Navbar.Brand>
+                        <Navbar.Brand href="/">
+                            {" "}
+                            <img
+                                src="/icon.png"
+                                width="30"
+                                height="30"
+                                className="d-inline-block align-top"
+                                alt="React Bootstrap logo"
+                            />{" "}
+                            Semillero GIBIC
+                        </Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Nav className="me-auto">
                             {type === "mqtt" && (

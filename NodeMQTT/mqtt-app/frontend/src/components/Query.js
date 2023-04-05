@@ -8,6 +8,8 @@ import { Container, Navbar } from "react-bootstrap";
 import DataChart from "./DataChart";
 import DataTable from "./DataTable";
 
+import "../styles/background.css";
+
 export default function Query(props) {
     // component props
     const location = useLocation();
@@ -86,10 +88,18 @@ export default function Query(props) {
     }
 
     return (
-        <div className="App">
-            <Navbar bg="light">
+        <div className="App app-background">
+            <Navbar className="sticky-top" bg="light">
                 <Container>
                     <Navbar.Brand onClick={HandleClick}>
+                        {" "}
+                        <img
+                            src="/icon.png"
+                            width="30"
+                            height="30"
+                            className="d-inline-block align-top"
+                            alt="React Bootstrap logo"
+                        />{" "}
                         Semillero GIBIC
                     </Navbar.Brand>
                     <Navbar.Collapse className="justify-content-end">

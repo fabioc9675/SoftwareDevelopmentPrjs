@@ -5,6 +5,8 @@ import { useNavigate } from "react-router";
 import mqtt from "precompiled-mqtt";
 import DataChart from "./DataChart";
 
+import "../styles/background.css";
+
 export default function StreamMqtt() {
     // Hooks of data
     const [topicName, setTopicName] = useState("iotUdeA/example");
@@ -56,6 +58,10 @@ export default function StreamMqtt() {
                 //     "Mensaje recibido en " + topic + ": " + message.toString()
                 // );
                 // console.log(instrumentObj);
+            });
+
+            client.on("error", (err) => {
+                console.log("error = ", err);
             });
         }
     }, [client]);
@@ -123,10 +129,18 @@ export default function StreamMqtt() {
     }
 
     return (
-        <div className="App">
-            <Navbar bg="light">
+        <div className="App app-background">
+            <Navbar className="sticky-top" bg="light">
                 <Container>
                     <Navbar.Brand onClick={HandleClick}>
+                        {" "}
+                        <img
+                            src="/icon.png"
+                            width="30"
+                            height="30"
+                            className="d-inline-block align-top"
+                            alt="React Bootstrap logo"
+                        />{" "}
                         Semillero GIBIC
                     </Navbar.Brand>
                     <Navbar.Collapse className="justify-content-end">
@@ -149,9 +163,11 @@ export default function StreamMqtt() {
             </Container>
 
             <div>
-                <Container className="p-5 mb-4 bg-light rounded-3">
-                    <div className="d-flex flex-row">
-                        <Card style={{ width: "66%" }}>
+                <Container className="p-5 mb-4 rounded-3 shadow-lg app-card">
+                    <div className="d-flex  flex-row">
+                        <Card
+                            style={{ backgroundColor: "#454e69", width: "66%" }}
+                        >
                             <Card.Header>Tópico</Card.Header>
                             <Card.Body>
                                 <Form.Control
@@ -165,7 +181,9 @@ export default function StreamMqtt() {
                             </Card.Body>
                         </Card>
 
-                        <Card style={{ width: "33%" }}>
+                        <Card
+                            style={{ backgroundColor: "#1d2333", width: "33%" }}
+                        >
                             <Card.Header>Suscribir Tópico</Card.Header>
                             <Card.Body>
                                 {/* <div className="row"> */}
@@ -199,9 +217,11 @@ export default function StreamMqtt() {
             </div>
 
             <div>
-                <Container className="p-5 mb-4 bg-light rounded-3">
+                <Container className="p-5 mb-4 rounded-3 shadow-lg app-card">
                     <div className="d-flex flex-row">
-                        <Card style={{ width: "33%" }}>
+                        <Card
+                            style={{ backgroundColor: "#454e69", width: "33%" }}
+                        >
                             <Card.Header>Tópico</Card.Header>
                             <Card.Body>
                                 <Form.Control
@@ -215,7 +235,9 @@ export default function StreamMqtt() {
                             </Card.Body>
                         </Card>
 
-                        <Card style={{ width: "33%" }}>
+                        <Card
+                            style={{ backgroundColor: "#454e69", width: "33%" }}
+                        >
                             <Card.Header>Mensaje</Card.Header>
                             <Card.Body>
                                 <Form.Control
@@ -229,7 +251,9 @@ export default function StreamMqtt() {
                             </Card.Body>
                         </Card>
 
-                        <Card style={{ width: "33%" }}>
+                        <Card
+                            style={{ backgroundColor: "#1d2333", width: "33%" }}
+                        >
                             <Card.Header>Publicar Tópico</Card.Header>
                             <Card.Body>
                                 <div className="col d-grid ">
