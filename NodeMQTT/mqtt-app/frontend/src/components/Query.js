@@ -4,6 +4,8 @@ import { useLocation, useNavigate } from "react-router";
 import { axiosInstance } from "../config/config";
 import moment from "moment";
 import { Container, Navbar } from "react-bootstrap";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import DataChart from "./DataChart";
 import DataTable from "./DataTable";
@@ -13,7 +15,8 @@ import "../styles/background.css";
 export default function Query(props) {
     // component props
     const location = useLocation();
-    const { author, type, subtopic, varname, title } = location.state;
+    const { author, type, subtopic, varname, title, topicText, eventText } =
+        location.state;
 
     // Hooks of data
     const [data, setData] = useState("Hello Fabian!");
@@ -100,7 +103,7 @@ export default function Query(props) {
                             className="d-inline-block align-top"
                             alt="React Bootstrap logo"
                         />{" "}
-                        Semillero GIBIC
+                        Semillero GIBIC-GICM
                     </Navbar.Brand>
                     <Navbar.Collapse className="justify-content-end">
                         <Navbar.Text>
@@ -117,10 +120,10 @@ export default function Query(props) {
                 </Container>
             </Navbar>
 
-            <Container className="p-3 ">
+            <Container className="p-5 ">
                 <h3 className="header" onClick={HandleClick}>
                     {title}
-                </h3>
+                </h3>{" "}
                 {/* <Container className="p-5 mb-4 bg-light rounded-3">
           <div className="d-flex flex-row">
             <Card style={{ width: "30%" }}>
@@ -144,6 +147,15 @@ export default function Query(props) {
           </div>
         </Container> */}
                 <DataChart data={instrumentObj} />
+                <Container className="p-5 mb-4 rounded-3 shadow-lg bg-transparent">
+                    <div className="d-flex flex-column">
+                        <h2>Estructura de datos</h2>
+                        <p>{topicText}</p>
+                        <SyntaxHighlighter language={"json"} style={darcula}>
+                            {eventText}
+                        </SyntaxHighlighter>
+                    </div>
+                </Container>
                 <DataTable data={instrumentObj} />
             </Container>
         </div>

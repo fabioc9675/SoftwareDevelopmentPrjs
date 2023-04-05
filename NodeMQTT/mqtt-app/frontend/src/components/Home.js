@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { Container, Nav, Navbar, Form, Card } from "react-bootstrap";
+import { Container, Nav, Navbar, Form, Card, Figure } from "react-bootstrap";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import { axiosInstance } from "../config/config";
+
+import "../styles/background.css";
 
 export default function Home() {
     // URL history
@@ -128,6 +132,8 @@ export default function Home() {
                     subtopic: topic,
                     varname: varname,
                     title: "Eventos MQTT",
+                    topicText: "Tópico = iotUdeA/<topico>",
+                    eventText: `{\n\t"author":"<Nombre>",\n\t"varname":"<Variable>",\n\t"varvalue":<Valor>\n}`,
                 },
             });
         }
@@ -142,6 +148,8 @@ export default function Home() {
                     subtopic: topic,
                     varname: varname,
                     title: "Eventos WebSocket",
+                    topicText: "Evento = iotUdeA/<event>",
+                    eventText: `{"<event>":{"author":"<Nombre>", "varname":"<variable>", "varvalue":<valor>}}'`,
                 },
             });
         }
@@ -156,6 +164,8 @@ export default function Home() {
                     subtopic: topic,
                     varname: varname,
                     title: "Eventos WebServer",
+                    topicText: "WebServer = POST request",
+                    eventText: `curl -X POST https://iotudeab4a1-fabioc9675.b4a.run/<API> \n\t-H "Content-Type: application/json" \n\t-d '{"topic": "iotUdeA/<webPost>", "author":"<Nombre>", "type":"webserver", "varname":"<variable>", "varvalue":<valor>}'`,
                 },
             });
         }
@@ -168,7 +178,7 @@ export default function Home() {
     }
 
     return (
-        <div>
+        <div className="global-background">
             <div>
                 <Navbar bg="light">
                     <Container>
@@ -181,7 +191,7 @@ export default function Home() {
                                 className="d-inline-block align-top"
                                 alt="React Bootstrap logo"
                             />{" "}
-                            Semillero GIBIC
+                            Semillero GIBIC-GICM
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Nav className="me-auto">
@@ -315,6 +325,134 @@ export default function Home() {
                                     </Form.Select>
                                 </Card.Body>
                             </Card>
+                        </div>
+                    </Container>
+                </div>
+            </div>
+
+            <div>
+                <div className="d-flex flex-row">
+                    <Container
+                        className="p-5 mb-4 rounded-3 shadow-lg bg-transparent"
+                        style={{ width: "100%" }}
+                    >
+                        <div className="d-flex flex-row">
+                            <div
+                                className="d-flex flex-column"
+                                style={{ width: "48%", padding: "1%" }}
+                            >
+                                <h2>Estructura de datos MQTT</h2>
+                                <p>{`Tópico = iotUdeA/<topico>`}</p>
+                                <SyntaxHighlighter
+                                    language={"json"}
+                                    style={darcula}
+                                >
+                                    {`{\n\t"author":"<Nombre>",\n\t"varname":"<Variable>",\n\t"varvalue":<Valor>\n}`}
+                                </SyntaxHighlighter>
+                            </div>
+                            <div
+                                className="d-flex flex-column shadow"
+                                style={{
+                                    width: "50%",
+                                    padding: "1%",
+                                    background: "#C0DBE8",
+                                }}
+                            >
+                                <Figure>
+                                    <Figure.Image
+                                        width="100%"
+                                        alt="171x180"
+                                        src="mqtt_protocol.png"
+                                    />
+                                    <Figure.Caption>
+                                        Protocolo MQTT
+                                    </Figure.Caption>
+                                </Figure>
+                            </div>
+                        </div>
+                    </Container>
+                </div>
+
+                <div className="d-flex flex-row">
+                    <Container
+                        className="p-5 mb-4 rounded-3 shadow-lg bg-transparent"
+                        style={{ width: "100%" }}
+                    >
+                        <div className="d-flex flex-row">
+                            <div
+                                className="d-flex flex-column"
+                                style={{ width: "48%", padding: "1%" }}
+                            >
+                                <h2>Estructura de datos WebSocket</h2>
+                                <p>{`Evento = iotUdeA/<event>`}</p>
+                                <SyntaxHighlighter
+                                    language={"json"}
+                                    style={darcula}
+                                >
+                                    {`{\n\t"<event>":\n\t{\n\t\t"author":"<Nombre>", \n\t\t"varname":"<variable>", \n\t\t"varvalue":<valor>\n\t}\n}'`}
+                                </SyntaxHighlighter>
+                            </div>
+                            <div
+                                className="d-flex flex-column shadow"
+                                style={{
+                                    width: "50%",
+                                    padding: "1%",
+                                    background: "#C0DBE8",
+                                }}
+                            >
+                                <Figure>
+                                    <Figure.Image
+                                        width="100%"
+                                        alt="171x180"
+                                        src="websocket_protocol.png"
+                                    />
+                                    <Figure.Caption>
+                                        Protocolo WebSocket
+                                    </Figure.Caption>
+                                </Figure>
+                            </div>
+                        </div>
+                    </Container>
+                </div>
+
+                <div className="d-flex flex-row">
+                    <Container
+                        className="p-5 mb-4 rounded-3 shadow-lg bg-transparent"
+                        style={{ width: "100%" }}
+                    >
+                        <div className="d-flex flex-row">
+                            <div
+                                className="d-flex flex-column"
+                                style={{ width: "48%", padding: "1%" }}
+                            >
+                                <h2>Estructura de datos WebServer</h2>
+                                <p>{`WebServer = API REST`}</p>
+                                <SyntaxHighlighter
+                                    language={"json"}
+                                    style={darcula}
+                                >
+                                    {`curl -X POST https://iotudeab4a1-fabioc9675.b4a.run/<API> \n\t-H "Content-Type: application/json" \n\t-d '{\n\t\t"topic": "iotUdeA/<webPost>", \n\t\t"author":"<Nombre>", \n\t\t"type":"webserver", \n\t\t"varname":"<variable>", \n\t\t"varvalue":<valor>\n\t}'`}
+                                </SyntaxHighlighter>
+                            </div>
+                            <div
+                                className="d-flex flex-column shadow"
+                                style={{
+                                    width: "50%",
+                                    padding: "1%",
+                                    background: "#C0DBE8",
+                                }}
+                            >
+                                <Figure>
+                                    <Figure.Image
+                                        width="100%"
+                                        alt="171x180"
+                                        src="webserver_protocol.png"
+                                    />
+                                    <Figure.Caption>
+                                        Protocolo WebServer
+                                    </Figure.Caption>
+                                </Figure>
+                            </div>
                         </div>
                     </Container>
                 </div>
