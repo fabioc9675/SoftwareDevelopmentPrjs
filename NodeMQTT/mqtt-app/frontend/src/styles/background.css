@@ -8,6 +8,15 @@
     color: #ffffff;
 }
 
+.global-background {
+    background-image: linear-gradient(
+        135deg,
+        #54dee3 5%,
+        #a5bad6 10%,
+        #54dee3 90%
+    );
+}
+
 .app-card {
     background-image: linear-gradient(to bottom, #1d2333, #009cd4);
 }

@@ -6,6 +6,8 @@ import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import { axiosInstance } from "../config/config";
 
+import "../styles/background.css";
+
 export default function Home() {
     // URL history
     const navigate = useNavigate();
@@ -176,7 +178,7 @@ export default function Home() {
     }
 
     return (
-        <div>
+        <div className="global-background">
             <div>
                 <Navbar bg="light">
                     <Container>
@@ -189,7 +191,7 @@ export default function Home() {
                                 className="d-inline-block align-top"
                                 alt="React Bootstrap logo"
                             />{" "}
-                            Semillero GIBIC
+                            Semillero GIBIC-GICM
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Nav className="me-auto">
@@ -350,7 +352,11 @@ export default function Home() {
                             </div>
                             <div
                                 className="d-flex flex-column shadow"
-                                style={{ width: "50%", padding: "1%" }}
+                                style={{
+                                    width: "50%",
+                                    padding: "1%",
+                                    background: "#C0DBE8",
+                                }}
                             >
                                 <Figure>
                                     <Figure.Image
@@ -388,7 +394,11 @@ export default function Home() {
                             </div>
                             <div
                                 className="d-flex flex-column shadow"
-                                style={{ width: "50%", padding: "1%" }}
+                                style={{
+                                    width: "50%",
+                                    padding: "1%",
+                                    background: "#C0DBE8",
+                                }}
                             >
                                 <Figure>
                                     <Figure.Image
@@ -426,7 +436,11 @@ export default function Home() {
                             </div>
                             <div
                                 className="d-flex flex-column shadow"
-                                style={{ width: "50%", padding: "1%" }}
+                                style={{
+                                    width: "50%",
+                                    padding: "1%",
+                                    background: "#C0DBE8",
+                                }}
                             >
                                 <Figure>
                                     <Figure.Image

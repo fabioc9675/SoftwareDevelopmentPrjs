@@ -143,7 +143,7 @@ export default function StreamMqtt() {
                             className="d-inline-block align-top"
                             alt="React Bootstrap logo"
                         />{" "}
-                        Semillero GIBIC
+                        Semillero GIBIC-GICM
                     </Navbar.Brand>
                     <Navbar.Collapse className="justify-content-end">
                         <Navbar.Text>
