@@ -1,0 +1,13 @@
+.app-background {
+    background-image: linear-gradient(
+        135deg,
+        #019cad 5%,
+        #454e69 10%,
+        #019cad 90%
+    );
+    color: "white";
+}
+
+.app-card {
+    background-image: linear-gradient(to bottom, #1d2333, #009cd4);
+}

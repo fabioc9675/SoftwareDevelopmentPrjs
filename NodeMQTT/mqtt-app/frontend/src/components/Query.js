@@ -8,6 +8,8 @@ import { Container, Navbar } from "react-bootstrap";
 import DataChart from "./DataChart";
 import DataTable from "./DataTable";
 
+import "../styles/background.css";
+
 export default function Query(props) {
     // component props
     const location = useLocation();
@@ -86,14 +88,7 @@ export default function Query(props) {
     }
 
     return (
-        <div
-            className="App"
-            style={{
-                backgroundImage:
-                    "linear-gradient( 135deg, #019CAD 5%, #454e69 10% , #019CAD 90%)",
-                color: "white",
-            }}
-        >
+        <div className="App app-background">
             <Navbar className="sticky-top" bg="light">
                 <Container>
                     <Navbar.Brand onClick={HandleClick}>

@@ -5,6 +5,8 @@ import { useNavigate } from "react-router";
 import mqtt from "precompiled-mqtt";
 import DataChart from "./DataChart";
 
+import "../styles/background.css";
+
 export default function StreamMqtt() {
     // Hooks of data
     const [topicName, setTopicName] = useState("iotUdeA/example");
@@ -127,14 +129,7 @@ export default function StreamMqtt() {
     }
 
     return (
-        <div
-            className="App"
-            style={{
-                backgroundImage:
-                    "linear-gradient( 135deg, #019CAD 5%, #454e69 10% , #019CAD 90%)",
-                color: "white",
-            }}
-        >
+        <div className="App app-background">
             <Navbar className="sticky-top" bg="light">
                 <Container>
                     <Navbar.Brand onClick={HandleClick}>
@@ -168,13 +163,7 @@ export default function StreamMqtt() {
             </Container>
 
             <div>
-                <Container
-                    className="p-5 mb-4 rounded-3 shadow-lg"
-                    style={{
-                        backgroundImage:
-                            "linear-gradient(to bottom, #1d2333, #009cD4)",
-                    }}
-                >
+                <Container className="p-5 mb-4 rounded-3 shadow-lg app-card">
                     <div className="d-flex  flex-row">
                         <Card
                             style={{ backgroundColor: "#454e69", width: "66%" }}
@@ -228,13 +217,7 @@ export default function StreamMqtt() {
             </div>
 
             <div>
-                <Container
-                    className="p-5 mb-4 rounded-3 shadow-lg"
-                    style={{
-                        backgroundImage:
-                            "linear-gradient(to bottom, #1d2333, #009cD4)",
-                    }}
-                >
+                <Container className="p-5 mb-4 rounded-3 shadow-lg app-card">
                     <div className="d-flex flex-row">
                         <Card
                             style={{ backgroundColor: "#454e69", width: "33%" }}
