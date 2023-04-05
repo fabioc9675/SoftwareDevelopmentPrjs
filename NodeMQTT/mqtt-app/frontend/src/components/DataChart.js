@@ -57,6 +57,7 @@ export default function DataChart(props) {
                     borderColor: `rgb(${red}, ${gre}, ${blu})`,
                     backgroundColor: `rgba(${red}, ${gre}, ${blu}, 0.5)`,
                     yAxisID: "y",
+                    color: "white",
                 },
             ],
         };
@@ -66,7 +67,7 @@ export default function DataChart(props) {
     }, [data]);
 
     return (
-        <div className="container">
+        <div className="container bg-transparent text-white shadow-lg">
             <h4>Gráfica de datos</h4>
             <div className="grey lighten-3">
                 <Line options={options} data={DataChart} />

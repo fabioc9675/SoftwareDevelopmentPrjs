@@ -86,8 +86,15 @@ export default function Query(props) {
     }
 
     return (
-        <div className="App">
-            <Navbar bg="light">
+        <div
+            className="App"
+            style={{
+                backgroundImage:
+                    "linear-gradient( 135deg, #019CAD 5%, #454e69 10% , #019CAD 90%)",
+                color: "white",
+            }}
+        >
+            <Navbar className="sticky-top" bg="light">
                 <Container>
                     <Navbar.Brand onClick={HandleClick}>
                         {" "}

@@ -127,8 +127,15 @@ export default function StreamMqtt() {
     }
 
     return (
-        <div className="App">
-            <Navbar bg="light">
+        <div
+            className="App"
+            style={{
+                backgroundImage:
+                    "linear-gradient( 135deg, #019CAD 5%, #454e69 10% , #019CAD 90%)",
+                color: "white",
+            }}
+        >
+            <Navbar className="sticky-top" bg="light">
                 <Container>
                     <Navbar.Brand onClick={HandleClick}>
                         {" "}
@@ -161,9 +168,17 @@ export default function StreamMqtt() {
             </Container>
 
             <div>
-                <Container className="p-5 mb-4 bg-light rounded-3">
-                    <div className="d-flex flex-row">
-                        <Card style={{ width: "66%" }}>
+                <Container
+                    className="p-5 mb-4 rounded-3 shadow-lg"
+                    style={{
+                        backgroundImage:
+                            "linear-gradient(to bottom, #1d2333, #009cD4)",
+                    }}
+                >
+                    <div className="d-flex  flex-row">
+                        <Card
+                            style={{ backgroundColor: "#454e69", width: "66%" }}
+                        >
                             <Card.Header>Tópico</Card.Header>
                             <Card.Body>
                                 <Form.Control
@@ -177,7 +192,9 @@ export default function StreamMqtt() {
                             </Card.Body>
                         </Card>
 
-                        <Card style={{ width: "33%" }}>
+                        <Card
+                            style={{ backgroundColor: "#1d2333", width: "33%" }}
+                        >
                             <Card.Header>Suscribir Tópico</Card.Header>
                             <Card.Body>
                                 {/* <div className="row"> */}
@@ -211,9 +228,17 @@ export default function StreamMqtt() {
             </div>
 
             <div>
-                <Container className="p-5 mb-4 bg-light rounded-3">
+                <Container
+                    className="p-5 mb-4 rounded-3 shadow-lg"
+                    style={{
+                        backgroundImage:
+                            "linear-gradient(to bottom, #1d2333, #009cD4)",
+                    }}
+                >
                     <div className="d-flex flex-row">
-                        <Card style={{ width: "33%" }}>
+                        <Card
+                            style={{ backgroundColor: "#454e69", width: "33%" }}
+                        >
                             <Card.Header>Tópico</Card.Header>
                             <Card.Body>
                                 <Form.Control
@@ -227,7 +252,9 @@ export default function StreamMqtt() {
                             </Card.Body>
                         </Card>
 
-                        <Card style={{ width: "33%" }}>
+                        <Card
+                            style={{ backgroundColor: "#454e69", width: "33%" }}
+                        >
                             <Card.Header>Mensaje</Card.Header>
                             <Card.Body>
                                 <Form.Control
@@ -241,7 +268,9 @@ export default function StreamMqtt() {
                             </Card.Body>
                         </Card>
 
-                        <Card style={{ width: "33%" }}>
+                        <Card
+                            style={{ backgroundColor: "#1d2333", width: "33%" }}
+                        >
                             <Card.Header>Publicar Tópico</Card.Header>
                             <Card.Body>
                                 <div className="col d-grid ">
