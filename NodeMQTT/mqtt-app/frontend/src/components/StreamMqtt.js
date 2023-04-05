@@ -57,6 +57,10 @@ export default function StreamMqtt() {
                 // );
                 // console.log(instrumentObj);
             });
+
+            client.on("error", (err) => {
+                console.log("error = ", err);
+            });
         }
     }, [client]);
 
@@ -127,6 +131,14 @@ export default function StreamMqtt() {
             <Navbar bg="light">
                 <Container>
                     <Navbar.Brand onClick={HandleClick}>
+                        {" "}
+                        <img
+                            src="/icon.png"
+                            width="30"
+                            height="30"
+                            className="d-inline-block align-top"
+                            alt="React Bootstrap logo"
+                        />{" "}
                         Semillero GIBIC
                     </Navbar.Brand>
                     <Navbar.Collapse className="justify-content-end">
