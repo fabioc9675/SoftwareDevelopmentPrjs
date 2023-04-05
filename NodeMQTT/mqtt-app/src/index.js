@@ -67,14 +67,13 @@ require("./routes/instrumentation.websocket")(socketClient);
 app.use("/api/instrumentation", require("./routes/instrumentation.routes")); // adding prefix to the route
 
 // Static files for development
-app.use(express.static(path.join(__dirname, "../frontend/public"))); // adding prefix to the route
-/*
+// app.use(express.static(path.join(__dirname, "../frontend/public"))); // adding prefix to the route
+
 // Static files for deployment
 app.use(express.static(path.join(__dirname, "../frontend/build"))); // adding prefix to the route
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/build", "index.html")); // Heroku creates the build for us
 });
-*/
 
 // Socket initialization
 socketClient.on("connection", (socket) => {
