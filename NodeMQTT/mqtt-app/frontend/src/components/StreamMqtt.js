@@ -3,6 +3,13 @@ import { Button, Card, Container, Navbar, Form } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
+import {
+    FaGithubSquare,
+    FaWordpress,
+    FaLinkedin,
+    FaYoutube,
+} from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 
 import mqtt from "precompiled-mqtt";
 import DataChart from "./DataChart";
@@ -289,6 +296,27 @@ export default function StreamMqtt() {
                     </div>
                 </Container>
             </div>
+            <Navbar className="sticky-bottom" bg="dark">
+                <Container>
+                    <Navbar.Collapse>
+                        <Navbar.Brand href="https://www.fabiancastano.com">
+                            <FaWordpress size={30} color="white" />
+                        </Navbar.Brand>{" "}
+                        <Navbar.Brand href="https://github.com/fabioc9675">
+                            <FaGithubSquare size={30} color="white" />
+                        </Navbar.Brand>{" "}
+                        <Navbar.Brand href="mailto:fabioc9675@gmail.com">
+                            <MdEmail size={30} color="white" />
+                        </Navbar.Brand>{" "}
+                        <Navbar.Brand href="https://www.linkedin.com/in/fabian-castano-83412536">
+                            <FaLinkedin size={30} color="white" />
+                        </Navbar.Brand>{" "}
+                        <Navbar.Brand href="https://www.youtube.com/channel/UCWdd0P8N_Ug6H5iSZgOykQg">
+                            <FaYoutube size={30} color="white" />
+                        </Navbar.Brand>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
         </div>
     );
 }

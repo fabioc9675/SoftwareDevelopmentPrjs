@@ -3,6 +3,13 @@ import { useNavigate } from "react-router";
 import { Container, Nav, Navbar, Form, Card, Figure } from "react-bootstrap";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
+import {
+    FaGithubSquare,
+    FaWordpress,
+    FaLinkedin,
+    FaYoutube,
+} from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
 
 import { axiosInstance } from "../config/config";
 
@@ -179,68 +186,63 @@ export default function Home() {
 
     return (
         <div className="global-background">
-            <div>
-                <Navbar bg="light">
-                    <Container>
-                        <Navbar.Brand href="/">
-                            {" "}
-                            <img
-                                src="/icon.png"
-                                width="30"
-                                height="30"
-                                className="d-inline-block align-top"
-                                alt="React Bootstrap logo"
-                            />{" "}
-                            Semillero GIBIC-GICM
-                        </Navbar.Brand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                        <Nav className="me-auto">
-                            {type === "mqtt" && (
-                                <Nav.Link
-                                    id="mqtt"
-                                    onClick={(e) => HandleClick(e)}
-                                >
-                                    Protocolo MQTT
-                                </Nav.Link>
-                            )}
-                            {type === "websocket" && (
-                                <Nav.Link
-                                    id="socket"
-                                    onClick={(e) => HandleClick(e)}
-                                >
-                                    Protocolo WebSocket
-                                </Nav.Link>
-                            )}
-                            {type === "webserver" && (
-                                <Nav.Link
-                                    id="server"
-                                    onClick={(e) => HandleClick(e)}
-                                >
-                                    Protocolo WebServer
-                                </Nav.Link>
-                            )}
+            <Navbar className="sticky-top" bg="light">
+                <Container>
+                    <Navbar.Brand href="/">
+                        {" "}
+                        <img
+                            src="/icon.png"
+                            width="30"
+                            height="30"
+                            className="d-inline-block align-top"
+                            alt="React Bootstrap logo"
+                        />{" "}
+                        Semillero GIBIC-GICM
+                    </Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Nav className="me-auto">
+                        {type === "mqtt" && (
+                            <Nav.Link id="mqtt" onClick={(e) => HandleClick(e)}>
+                                Protocolo MQTT
+                            </Nav.Link>
+                        )}
+                        {type === "websocket" && (
                             <Nav.Link
-                                id="mqttStream"
+                                id="socket"
                                 onClick={(e) => HandleClick(e)}
                             >
-                                MQTT Streaming
+                                Protocolo WebSocket
                             </Nav.Link>
-                        </Nav>
-                        <Navbar.Collapse className="justify-content-end">
-                            <Navbar.Text>
-                                Powered by:{" "}
-                                <a href="https://github.com/fabioc9675">
-                                    Fabian Castaño
-                                </a>{" "}
-                                -{" "}
-                                <a href="https://github.com/jongalon">
-                                    Jonathan Gallego
-                                </a>
-                            </Navbar.Text>
-                        </Navbar.Collapse>
-                    </Container>
-                </Navbar>
-            </div>
+                        )}
+                        {type === "webserver" && (
+                            <Nav.Link
+                                id="server"
+                                onClick={(e) => HandleClick(e)}
+                            >
+                                Protocolo WebServer
+                            </Nav.Link>
+                        )}
+                        <Nav.Link
+                            id="mqttStream"
+                            onClick={(e) => HandleClick(e)}
+                        >
+                            MQTT Streaming
+                        </Nav.Link>
+                    </Nav>
+                    <Navbar.Collapse className="justify-content-end">
+                        <Navbar.Text>
+                            Powered by:{" "}
+                            <a href="https://github.com/fabioc9675">
+                                Fabian Castaño
+                            </a>{" "}
+                            -{" "}
+                            <a href="https://github.com/jongalon">
+                                Jonathan Gallego
+                            </a>
+                        </Navbar.Text>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
 
             <div>
                 <div>
@@ -456,6 +458,27 @@ export default function Home() {
                         </div>
                     </Container>
                 </div>
+                <Navbar className="sticky-bottom" bg="dark">
+                    <Container>
+                        <Navbar.Collapse>
+                            <Navbar.Brand href="https://www.fabiancastano.com">
+                                <FaWordpress size={30} color="white" />
+                            </Navbar.Brand>{" "}
+                            <Navbar.Brand href="https://github.com/fabioc9675">
+                                <FaGithubSquare size={30} color="white" />
+                            </Navbar.Brand>{" "}
+                            <Navbar.Brand href="mailto:fabioc9675@gmail.com">
+                                <MdEmail size={30} color="white" />
+                            </Navbar.Brand>{" "}
+                            <Navbar.Brand href="https://www.linkedin.com/in/fabian-castano-83412536">
+                                <FaLinkedin size={30} color="white" />
+                            </Navbar.Brand>{" "}
+                            <Navbar.Brand href="https://www.youtube.com/channel/UCWdd0P8N_Ug6H5iSZgOykQg">
+                                <FaYoutube size={30} color="white" />
+                            </Navbar.Brand>
+                        </Navbar.Collapse>
+                    </Container>
+                </Navbar>
             </div>
 
             {/* <div>{imprimir}</div> */}
