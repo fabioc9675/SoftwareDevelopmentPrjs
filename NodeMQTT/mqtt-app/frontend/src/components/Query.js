@@ -61,6 +61,9 @@ export default function Query(props) {
             console.log(message);
             loadDataFromDB();
         });
+        socket.on("connect_error", (err) => {
+            console.log(`connect_error due to ${err.message}`);
+        });
 
         // loadDataFromDB();
     }, []);
