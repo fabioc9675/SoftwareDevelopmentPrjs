@@ -61,12 +61,12 @@ export default function Query(props) {
             loadDataFromDB();
         });
 
-        loadDataFromDB();
+        // loadDataFromDB();
     }, []);
 
-    // useEffect(() => {
-    //     loadDataFromDB();
-    // }, []);
+    useEffect(() => {
+        loadDataFromDB();
+    }, []);
 
     // Load Data from database
     function loadDataFromDB() {
