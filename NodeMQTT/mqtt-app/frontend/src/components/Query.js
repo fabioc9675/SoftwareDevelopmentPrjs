@@ -54,6 +54,7 @@ export default function Query(props) {
         const socket = io(axiosInstance.getUri(), {
             transports: ["websocket"],
         });
+        console.log("connecting socket");
         // initialization of socket io in the client side
         socket.on("notify", (message) => {
             console.log(message);
