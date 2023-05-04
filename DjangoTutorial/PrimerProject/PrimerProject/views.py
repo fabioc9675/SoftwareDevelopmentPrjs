@@ -1,10 +1,22 @@
 from django.http import HttpResponse
+from django.template import Template, Context
 import datetime
 
 
 def saludo(request):
     # Esta es la primera funcion vista, nos devulve una rerspuesta HTTP
-    return HttpResponse("Hola Alumnos, esta es nuestra primera pagina con Django")
+    # Apertura y lectura de la plantilla
+    doc_externo = open(
+        "C:/GitHub/ReactNativeProjects/SoftwareDevelopmentPrjs/DjangoTutorial/PrimerProject/PrimerProject/plantillas/miplantilla.html")
+    plt = Template(doc_externo.read())
+    doc_externo.close()
+
+    # Creacion del contexto
+    ctx = Context()
+
+    documento = plt.render(ctx)
+
+    return HttpResponse(documento)
 
 
 def despedida(request):
