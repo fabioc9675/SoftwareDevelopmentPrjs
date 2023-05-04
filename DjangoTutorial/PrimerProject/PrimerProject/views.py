@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.template import Template, Context
 import datetime
+import os.path
 
 
 class Persona(object):
@@ -16,14 +17,14 @@ def saludo(request):
 
     # Agregaremos esta variable a el codigo HTML
     p1 = Persona("Fabian", "Castaño")
-
     nombre = "Juan"
     apellido = "Diaz"
-
     ahora = datetime.datetime.now()
 
-    doc_externo = open(
-        "C:/GitHub/ReactNativeProjects/SoftwareDevelopmentPrjs/DjangoTutorial/PrimerProject/PrimerProject/plantillas/miplantilla.html")
+    path_rel = (os.path.join(os.path.dirname(__file__), "plantillas/miplantilla.html").replace('\\','/'))
+    #doc_externo = open(
+    #    "C:/GitHub/ReactNativeProjects/SoftwareDevelopmentPrjs/DjangoTutorial/PrimerProject/PrimerProject/plantillas/miplantilla.html")
+    doc_externo = open(path_rel)
     plt = Template(doc_externo.read())
     doc_externo.close()
 
