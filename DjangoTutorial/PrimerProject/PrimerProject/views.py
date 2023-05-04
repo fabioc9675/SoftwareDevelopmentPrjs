@@ -20,6 +20,7 @@ def saludo(request):
     nombre = "Juan"
     apellido = "Diaz"
     ahora = datetime.datetime.now()
+    temas = ["plantillas", "modelos", "formularios", "vistas", "Despliegue"]
 
     path_rel = (os.path.join(os.path.dirname(__file__), "plantillas/miplantilla.html").replace('\\','/'))
     #doc_externo = open(
@@ -31,7 +32,8 @@ def saludo(request):
     # Creacion del contexto
     # para pasar variables al html hay que usar diccionarios
     ctx = Context({"nombre_persona": nombre,
-                  "apellido_persona": apellido, "momento_actual": ahora, "persona_alumno": p1})
+                  "apellido_persona": apellido, "momento_actual": ahora, "persona_alumno": p1, 
+                  "temas":temas}) # Agregando una lista en los datos
 
     documento = plt.render(ctx)
 
