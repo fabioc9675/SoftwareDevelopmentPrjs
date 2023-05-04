@@ -3,16 +3,34 @@ from django.template import Template, Context
 import datetime
 
 
+class Persona(object):
+
+    def __init__(self, nombre, apellido):
+        self.nombre = nombre
+        self.apellido = apellido
+
+
 def saludo(request):
     # Esta es la primera funcion vista, nos devulve una rerspuesta HTTP
     # Apertura y lectura de la plantilla
+
+    # Agregaremos esta variable a el codigo HTML
+    p1 = Persona("Fabian", "Castaño")
+
+    nombre = "Juan"
+    apellido = "Diaz"
+
+    ahora = datetime.datetime.now()
+
     doc_externo = open(
         "C:/GitHub/ReactNativeProjects/SoftwareDevelopmentPrjs/DjangoTutorial/PrimerProject/PrimerProject/plantillas/miplantilla.html")
     plt = Template(doc_externo.read())
     doc_externo.close()
 
     # Creacion del contexto
-    ctx = Context()
+    # para pasar variables al html hay que usar diccionarios
+    ctx = Context({"nombre_persona": nombre,
+                  "apellido_persona": apellido, "momento_actual": ahora, "persona_alumno": p1})
 
     documento = plt.render(ctx)
 
