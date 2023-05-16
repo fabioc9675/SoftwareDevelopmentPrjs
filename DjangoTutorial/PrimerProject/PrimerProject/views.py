@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.template import Template, Context
+from django.template import loader  # Uso de cargador para recuperar los templates
 import datetime
 import os.path
 
@@ -22,20 +23,26 @@ def saludo(request):
     ahora = datetime.datetime.now()
     temas = ["plantillas", "modelos", "formularios", "vistas", "Despliegue"]
 
-    path_rel = (os.path.join(os.path.dirname(__file__), "plantillas/miplantilla.html").replace('\\','/'))
-    #doc_externo = open(
+    # path_rel = (os.path.join(os.path.dirname(__file__), "plantillas/miplantilla.html").replace('\\','/'))
+    # doc_externo = open(
     #    "C:/GitHub/ReactNativeProjects/SoftwareDevelopmentPrjs/DjangoTutorial/PrimerProject/PrimerProject/plantillas/miplantilla.html")
-    doc_externo = open(path_rel)
-    plt = Template(doc_externo.read())
-    doc_externo.close()
+    # doc_externo = open(path_rel)
+    # plt = Template(doc_externo.read())
+    # doc_externo.close()
+
+    # Cargar plantillas usando loadrer
+    doc_externo = loader.get_template("miplantilla.html")
 
     # Creacion del contexto
     # para pasar variables al html hay que usar diccionarios
-    ctx = Context({"nombre_persona": nombre,
-                  "apellido_persona": apellido, "momento_actual": ahora, "persona_alumno": p1, 
-                  "temas":temas}) # Agregando una lista en los datos
+    # ctx = Context({"nombre_persona": nombre,
+    #               "apellido_persona": apellido, "momento_actual": ahora, "persona_alumno": p1,
+    #                "temas": temas})  # Agregando una lista en los datos
 
-    documento = plt.render(ctx)
+    # documento = plt.render(ctx)
+    documento = doc_externo.render({"nombre_persona": nombre,
+                                    "apellido_persona": apellido, "momento_actual": ahora, "persona_alumno": p1,
+                                    "temas": temas})
 
     return HttpResponse(documento)
 
