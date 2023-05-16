@@ -1,6 +1,8 @@
 from django.http import HttpResponse
 from django.template import Template, Context
 from django.template import loader  # Uso de cargador para recuperar los templates
+from django.shortcuts import render
+
 import datetime
 import os.path
 
@@ -47,8 +49,14 @@ def saludo(request):
     return HttpResponse(documento)
 
 
-def despedida(request):
-    return HttpResponse("Hasta luego alumnos de Django")
+def despedida(request):  # carga de template usando render
+    # return HttpResponse("Hasta luego alumnos de Django")
+    nombre = "Juan"
+    apellido = "Diaz"
+
+    data = {"nombre_persona": nombre, "apellido_persona": apellido}
+
+    return render(request, "otraplantilla.html", data)
 
 
 def damefecha(request):
