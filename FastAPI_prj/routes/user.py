@@ -2,6 +2,8 @@ from fastapi import APIRouter  # Definir todas las rutas
 from config.db import conn  # importar el objeto de conexion
 from schemas.user import userEntity, usersEntity
 from models.user import User  # tipo de la entidad
+from passlib.hash import sha256_crypt
+from bson import ObjectId
 
 user = APIRouter()
 
@@ -17,6 +19,8 @@ def find_all_user():
 def find_all_user(user: User):
     # crear nuevo usuario
     new_user = dict(user)
+    new_user["password"] = sha256_crypt.encrypt(new_user['password'])
+    del new_user['_id']
     id = conn.remote.user.insert_one(new_user).inserted_id
     # consulta en la base de datos el ultimo dato creado
     user = conn.remote.user.find_one({"_id": id})
@@ -24,9 +28,9 @@ def find_all_user(user: User):
 
 
 @user.get('/users/{id}')
-def find_user():
+def find_user(id: str):
     # buscar un unico usuario
-    return "hello world"
+    return userEntity(conn.remote.user.find_one({"_id": ObjectId(id)}))
 
 
 @user.put('/users/{id}')

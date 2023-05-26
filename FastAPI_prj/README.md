@@ -19,3 +19,4 @@ create a virtual environment
 -   pip install uvicorn
 -   pip install pymongo
 -   pip install python-dotenv
+-   pip install passlib
