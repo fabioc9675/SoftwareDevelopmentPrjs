@@ -11,6 +11,7 @@ create a virtual environment
 ## Correr el servidor
 
 -   `uvicorn app:app` dentro del archivo app correr el objeto app
+-   `uvicorn app:app --reload` dentro del archivo app correr el objeto app para recargar
 
 ## Python packages
 
