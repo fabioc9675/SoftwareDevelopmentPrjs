@@ -1,4 +1,6 @@
 from fastapi import APIRouter  # Definir todas las rutas
+from config.db import conn  # importar el objeto de conexion
+from schemas.user import userEntity, usersEntity
 
 user = APIRouter()
 
@@ -6,7 +8,8 @@ user = APIRouter()
 @user.get('/users')
 def find_all_user():
     # cuando se acceda a la ruta users se retornara todos los usuarios
-    return "hello world"
+    # de la connexion a mondo busque en la coleccion user todos
+    return usersEntity(conn.remote.user.find())
 
 
 @user.post('/users')
