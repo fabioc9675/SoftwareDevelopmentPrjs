@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Response  # Definir todas las rutas
+from fastapi import APIRouter, Response, status  # Definir todas las rutas
 from config.db import conn  # importar el objeto de conexion
 from schemas.user import userEntity, usersEntity
 from models.user import User  # tipo de la entidad
@@ -9,14 +9,14 @@ from starlette.status import HTTP_204_NO_CONTENT
 user = APIRouter()
 
 
-@user.get('/users')
+@user.get('/users', response_model=list[User], tags=["Users"])
 def find_all_user():
     # cuando se acceda a la ruta users se retornara todos los usuarios
     # de la connexion a mondo busque en la coleccion user todos
     return usersEntity(conn.remote.user.find())
 
 
-@user.post('/users')
+@user.post('/users', response_model=User, tags=["Users"])
 def find_all_user(user: User):
     # crear nuevo usuario
     new_user = dict(user)
@@ -28,13 +28,13 @@ def find_all_user(user: User):
     return userEntity(user)
 
 
-@user.get('/users/{id}')
+@user.get('/users/{id}', response_model=User, tags=["Users"])
 def find_user(id: str):
     # buscar un unico usuario
     return userEntity(conn.remote.user.find_one({"_id": ObjectId(id)}))
 
 
-@user.put('/users/{id}')
+@user.put('/users/{id}', response_model=User, tags=["Users"])
 def update_user(id: str, user: User):
     # actualizar usuario
     conn.remote.user.find_one_and_update(
@@ -42,7 +42,7 @@ def update_user(id: str, user: User):
     return userEntity(conn.remote.user.find_one({"_id": ObjectId(id)}))
 
 
-@user.delete('/users/{id}')
+@user.delete('/users/{id}', status_code=status.HTTP_204_NO_CONTENT, tags=["Users"])
 def delete_user(id: str):
     # eliminar usuario
     userEntity(conn.remote.user.find_one_and_delete({"_id": ObjectId(id)}))

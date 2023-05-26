@@ -1,5 +1,7 @@
 # Use of FastAPI as REST API
 
+-   Link: https://www.youtube.com/watch?v=4e2VW3Nu-64
+
 create a virtual environment
 
 -   creacion del entorno virtual `virtualenv -p python3 python-mongo`
