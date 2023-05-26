@@ -1,7 +1,11 @@
 from pymongo import MongoClient  # conexion a una base de datos
 from pymongo.server_api import ServerApi
+from dotenv import load_dotenv
+import os
 
-uri = "mongodb+srv://fabian:fabian@instrumentation.uqtyxfa.mongodb.net/?retryWrites=true&w=majority"
+load_dotenv()
+
+uri = os.getenv("MONGO_URI")
 
 conn = MongoClient(uri)  # , server_api=ServerApi('1'))
 
