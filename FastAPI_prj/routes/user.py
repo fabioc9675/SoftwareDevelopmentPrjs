@@ -1,9 +1,10 @@
-from fastapi import APIRouter  # Definir todas las rutas
+from fastapi import APIRouter, Response  # Definir todas las rutas
 from config.db import conn  # importar el objeto de conexion
 from schemas.user import userEntity, usersEntity
 from models.user import User  # tipo de la entidad
 from passlib.hash import sha256_crypt
 from bson import ObjectId
+from starlette.status import HTTP_204_NO_CONTENT
 
 user = APIRouter()
 
@@ -40,6 +41,7 @@ def update_user():
 
 
 @user.delete('/users/{id}')
-def delete_user():
+def delete_user(id: str):
     # eliminar usuario
-    return "hello world"
+    userEntity(conn.remote.user.find_one_and_delete({"_id": ObjectId(id)}))
+    return Response(status_code=HTTP_204_NO_CONTENT)
