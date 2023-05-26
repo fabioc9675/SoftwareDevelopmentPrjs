@@ -35,9 +35,11 @@ def find_user(id: str):
 
 
 @user.put('/users/{id}')
-def update_user():
+def update_user(id: str, user: User):
     # actualizar usuario
-    return "hello world"
+    conn.remote.user.find_one_and_update(
+        {"_id": ObjectId(id)}, {"$set": dict(user)})
+    return userEntity(conn.remote.user.find_one({"_id": ObjectId(id)}))
 
 
 @user.delete('/users/{id}')
