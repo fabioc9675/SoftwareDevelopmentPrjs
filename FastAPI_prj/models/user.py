@@ -5,7 +5,7 @@ from pydantic import BaseModel
 
 
 class User(BaseModel):  # User hereda de BaseModel
-    id: Optional[str]  # el id es opcional
+    _id: Optional[str]  # el id es opcional
     name: str
     email: str
     password: str

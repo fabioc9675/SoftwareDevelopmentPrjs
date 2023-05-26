@@ -1,7 +1,7 @@
 def userEntity(item) -> dict:
     # creacion de los esquemas para almacenar en mongo
     return {
-        "id": item["id"],
+        "_id": str(item["_id"]),
         "name": item["name"],
         "email": item["email"],
         "password": item["password"]
@@ -10,4 +10,4 @@ def userEntity(item) -> dict:
 
 def usersEntity(entity) -> list:
     # esquema de retorno de todos los usuarios
-    [userEntity(item) for item in entity]
+    return [userEntity(item) for item in entity]
