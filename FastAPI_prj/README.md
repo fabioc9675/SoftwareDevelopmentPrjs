@@ -7,3 +7,12 @@ create a virtual environment
 -   para exportar los paquetes del env `pip freeze > requirements.txt`
 -   para instalar de nuevo los paquetes `pip install -r .\requirements.txt`
 -   para desactivar el entorno `deactivate`
+
+## Correr el servidor
+
+-   `uvicorn app:app` dentro del archivo app correr el objeto app
+
+## Python packages
+
+-   pip install fastapi
+-   pip install uvicorn
