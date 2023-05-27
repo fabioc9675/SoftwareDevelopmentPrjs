@@ -1,22 +1,56 @@
-from flask import Flask, request
-from flask_pymongo import PyMongo
-from dotenv import load_dotenv
-import os
+from flask import Flask, request, Response, jsonify
+from flask_cors import CORS
+# librerias para seguridad en el password
+# from werkzeug.security import generate_password_hash, check_password_hash
 
-load_dotenv()
-uri = os.getenv("MONGO_URI")
+import config.db as dbase
+from schema.product import Product
+
+# Acceder a la base de datos
+db = dbase.dbConnection()
+
 
 app = Flask(__name__)
-app.config['MONGO_URI'] = uri  # configuracion de conexion con la base de datos
-mongo = PyMongo(app)  # se realiza la conexion con la base de datos
+CORS(app)
 
 
 # Creacion de rutas
-@app.route('/users', methods=['POST'])
-def create_user():
-    # Receiving data
+@app.route('/products', methods=['POST'])
+def create_products():
+    products = db['products']
+    name = request.json['name']
+    price = request.json['price']
+    quantity = request.json['quantity']
 
-    return {'message': 'received'}
+    if name and price and quantity:
+        product = Product(name, price, quantity)
+        products.insert_one(product.toDBCollection())
+        response = jsonify({
+            "name": name,
+            "price": price,
+            "quantity": quantity
+        })
+
+        return response
+    else:
+        return {'message': "Error guardando"}
+
+
+@app.route('/products', methods=['GET'])
+def load_products():
+    products = db['products']
+    productsReceived = products.find()
+    return [userEntity(item) for item in productsReceived]
+
+
+def userEntity(item) -> dict:
+    # creacion de los esquemas para almacenar en mongo
+    return {
+        "_id": str(item["_id"]),
+        "name": item["name"],
+        "price": item["price"],
+        "quantity": item["quantity"]
+    }
 
 
 if __name__ == "__main__":
