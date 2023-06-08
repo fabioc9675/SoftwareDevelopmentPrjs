@@ -1,5 +1,11 @@
 FROM python:3.9
 
+EXPOSE 8000
+
+ENV PYTHONDONTWRITEBYTECODE=1
+
+ENV PYTHONUNBUFFERED=1
+
 WORKDIR /
 
 COPY requirements.txt requirements.txt
