@@ -11,5 +11,5 @@ class Monitor(BaseModel):  # Monitor hereda de BaseModel
     author: str
     temperature: float
     humidity: float
-    createdAt: datetime.datetime
-    updatedAt: datetime.datetime
+    createdAt: Optional[datetime.datetime]
+    updatedAt: Optional[datetime.datetime]
