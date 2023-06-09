@@ -12,6 +12,9 @@ app = FastAPI(
     openapi_tags=tags_metadata
 )
 
+# carga de la ruta
+app.include_router(monitor)
+
 # despliegue de frontend
 app.mount("/", StaticFiles(directory="frontend/build",
           html=True), name="frontend")
@@ -23,6 +26,3 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# carga de la ruta
-app.include_router(monitor)
