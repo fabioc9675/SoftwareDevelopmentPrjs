@@ -22,3 +22,13 @@ create a virtual environment
 - pip install pymongo
 - pip install python-dotenv
 - pip install passlib
+
+## FrontEnd
+
+- npx create-react-app frontend
+- npm install axios
+- npm install bootstrap
+- npm install moment
+- npm install react-bootstrap
+- npm install react-chartjs-2
+- npm install react-icons
