@@ -18,12 +18,14 @@ from django.contrib import admin
 from django.urls import path
 
 # views import
-from PrimerProject.views import saludo, despedida, damefecha, calculeEdad
+from PrimerProject.views import saludo, despedida, damefecha, calculeEdad, cursoC, cursoCss
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('saludo/', saludo),
     path('despedida/', despedida),
     path('fecha/', damefecha),
-    path('edad/<int:edad>/<int:agno>', calculeEdad)
+    path('edad/<int:edad>/<int:agno>', calculeEdad),
+    path('cursoC/', cursoC),
+    path('cursoCss/', cursoCss)
 ]
