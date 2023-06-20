@@ -11,3 +11,5 @@ create a virtual environment
 - Creacion de proyecto local `django-admin startproject djangocrud .`
 - Creacion de Applicacion `python .\manage.py startapp task`
 - Creacion de tablas en la base de datos `python .\manage.py migrate`
+- Compila el models.py y crea tabla `python .\manage.py makemigrations` y entonces `python .\manage.py migrate`
+- Creacion de un superusuario para la app `python .\manage.py createsuperuser` user: admin, pass: admin, solo por ejemplo
