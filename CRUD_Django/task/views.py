@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 # modelo creado para registrar usuario
 from django.contrib.auth.models import User
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 
 
@@ -14,7 +14,9 @@ def home(request):
 def signup(request):
 
     if request.method == 'GET':
-        return render(request, 'signup.html', {'form': UserCreationForm})
+        return render(request, 'signup.html', {
+            'form': UserCreationForm
+        })
     else:
 
         if request.POST['password1'] == request.POST['password2']:
@@ -28,9 +30,13 @@ def signup(request):
                 return redirect('task')
             except IntegrityError:  # manejo de excepciones de forma manual.
                 return render(request, 'signup.html', {
-                    'form': UserCreationForm, 'error': 'User already exists'})
+                    'form': UserCreationForm,
+                    'error': 'User already exists'
+                })
         return render(request, 'signup.html', {
-            'form': UserCreationForm, 'error': 'Password do not match'})
+            'form': UserCreationForm,
+            'error': 'Password do not match'
+        })
 
 
 def task(request):
@@ -43,4 +49,19 @@ def signout(request):
 
 
 def signin(request):
-    return render(request, 'signin.html')
+    if request.method == 'GET':
+        return render(request, 'signin.html', {
+            'form': AuthenticationForm,
+        })
+    else:
+        user = authenticate(
+            request, username=request.POST['username'], password=request.POST['password'])
+        if user is None:
+            return render(request, 'signin.html', {
+                'form': AuthenticationForm,
+                'error': 'Username or Password is incorrect'
+            })
+        else:
+            # Guardo la seccion del usuario que acaba de logearse
+            login(request, user)
+            return redirect('task')
