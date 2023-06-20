@@ -9,3 +9,4 @@ create a virtual environment
 - para desactivar el entorno `deactivate`
 
 - Creacion de proyecto local `django-admin startproject djangocrud .`
+- Creacion de Applicacion `python .\manage.py startapp task`
