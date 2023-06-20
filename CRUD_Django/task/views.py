@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 # modelo creado para registrar usuario
 from django.contrib.auth.models import User
 from django.contrib.auth import login
-from django.http import HttpResponse
+from django.db import IntegrityError
 
 
 # Create your views here.
@@ -26,10 +26,11 @@ def signup(request):
                 # Con esto se crea una cookie de autenticacion para usar los datos del usuario luego en la aplicacion
                 login(request, user)
                 return redirect('task')
-            except:
+            except IntegrityError:  # manejo de excepciones de forma manual.
                 return render(request, 'signup.html', {
-                    'form': UserCreationForm, 'error': 'Username already exist'})
-        return HttpResponse('Password do not match')
+                    'form': UserCreationForm, 'error': 'User already exists'})
+        return render(request, 'signup.html', {
+            'form': UserCreationForm, 'error': 'Password do not match'})
 
 
 def task(request):
