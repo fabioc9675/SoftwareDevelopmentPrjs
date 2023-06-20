@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm
 # modelo creado para registrar usuario
 from django.contrib.auth.models import User
+from django.contrib.auth import login
 from django.http import HttpResponse
 
 
@@ -22,7 +23,14 @@ def signup(request):
                 user = User.objects.create_user(
                     username=request.POST['username'], password=request.POST['password1'])
                 user.save()  # Guarda en la base de datos SQLite por defecto
-                return HttpResponse('User created successfully')
+                # Con esto se crea una cookie de autenticacion para usar los datos del usuario luego en la aplicacion
+                login(request, user)
+                return redirect('task')
             except:
-                return HttpResponse('Username already exist')
+                return render(request, 'signup.html', {
+                    'form': UserCreationForm, 'error': 'Username already exist'})
         return HttpResponse('Password do not match')
+
+
+def task(request):
+    return render(request, 'task.html')

@@ -22,5 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # name es para standardizar el las rutas sin tener que modificarlas en otros lados
     path('', views.home, name='home'),
-    path('signup/', views.signup, name='signup')
+    path('signup/', views.signup, name='signup'),
+    path('task/', views.task, name='task'),
 ]
