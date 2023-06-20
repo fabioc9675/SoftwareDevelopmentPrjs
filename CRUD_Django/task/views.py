@@ -40,3 +40,7 @@ def task(request):
 def signout(request):
     logout(request)
     return redirect('home')
+
+
+def signin(request):
+    return render(request, 'signin.html')
