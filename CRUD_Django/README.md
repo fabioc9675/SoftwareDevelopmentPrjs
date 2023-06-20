@@ -10,3 +10,4 @@ create a virtual environment
 
 - Creacion de proyecto local `django-admin startproject djangocrud .`
 - Creacion de Applicacion `python .\manage.py startapp task`
+- Creacion de tablas en la base de datos `python .\manage.py migrate`
