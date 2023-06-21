@@ -47,11 +47,27 @@ def task(request):
 
 
 def task_detail(request, task_id):
-    # task = Task.objects.get(pk=task_id)
-    task = get_object_or_404(Task, pk=task_id)
-    return render(request, 'task_detail.html', {
-        'task': task
-    })
+    if request.method == 'GET':
+        try:
+            # task = Task.objects.get(pk=task_id)
+            task = get_object_or_404(Task, pk=task_id, user=request.user)
+            form = TaskForm(instance=task)
+            return render(request, 'task_detail.html', {
+                'task': task,
+                'form': form
+            })
+        except ValueError:
+            return render(request, 'task_detail.html', {
+                'task': task,
+                'form': form,
+                'error': 'Error updating task'
+            })
+    else:
+        # Asi me aseguro de solo actualizar mis tareas
+        task = get_object_or_404(Task, pk=task_id, user=request.user)
+        form = TaskForm(request.POST, instance=task)
+        form.save()
+        return redirect('task')
 
 
 def create_task(request):
