@@ -47,6 +47,12 @@ def task(request):
     return render(request, 'task.html', {'tasks': tasks})
 
 
+def task_completed(request):
+    tasks = Task.objects.filter(
+        user=request.user, datecompleted__isnull=False).order_by('-datecompleted')
+    return render(request, 'task.html', {'tasks': tasks})
+
+
 def task_detail(request, task_id):
     if request.method == 'GET':
         try:
