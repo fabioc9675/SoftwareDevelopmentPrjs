@@ -21,3 +21,4 @@ create a virtual environment
 - Hacer la migracion de las tablas `python .\manage.py makemigrations`
 - Crea las tablas en SQLite `python manage.py migrate tasks`
 - Creacion de super usuario `python manage.py createsuperuser`
+- Crear documentacion de las API `pip install coreapi`
