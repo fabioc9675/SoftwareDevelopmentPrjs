@@ -22,3 +22,8 @@ create a virtual environment
 - Crea las tablas en SQLite `python manage.py migrate tasks`
 - Creacion de super usuario `python manage.py createsuperuser`
 - Crear documentacion de las API `pip install coreapi`
+
+## Creacion del cliente
+
+- Crear un proyeco react con Vite `npm create vite`
+- Instalacion de algunas librerias `npm i react-router-dom react-hot-toast axios react-hook-form`
