@@ -11,3 +11,9 @@ create a virtual environment
 - Creacion de proyecto local `django-admin startproject djangocrud .`
 - Crear una aplicacion en el proyecto `python manage.py startapp tasks`
 - Creacion de las tablas para el proyecto `python manage.py migrate`
+- Instalacion del framework rest `pip install djangorestframework`
+
+## Configuracion REST Framework
+
+- Configuracion del Back y el Front
+- Instalacion de manejador de cors `pip install django-cors-headers`
