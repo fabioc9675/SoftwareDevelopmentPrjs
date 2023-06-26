@@ -30,12 +30,12 @@ def animalsConvert(animals, addr, label):
 os.sep = '/'
 
 # Directories
-cats_dir = os.path.join(os.sep, "tensorflow", "datasets", "cat")
-dogs_dir = os.path.join(os.sep, "tensorflow", "datasets", "dog")
-monk_dir = os.path.join(os.sep, "tensorflow", "datasets", "monkey")
-parr_dir = os.path.join(os.sep, "tensorflow", "datasets", "parrot")
-elep_dir = os.path.join(os.sep, "tensorflow", "datasets", "elephant")
-bear_dir = os.path.join(os.sep, "tensorflow", "datasets", "bear")
+cats_dir = os.path.join(os.sep, "tensorflow", "data", "cat")
+dogs_dir = os.path.join(os.sep, "tensorflow", "data", "dog")
+monk_dir = os.path.join(os.sep, "tensorflow", "data", "monkey")
+parr_dir = os.path.join(os.sep, "tensorflow", "data", "parrot")
+elep_dir = os.path.join(os.sep, "tensorflow", "data", "elephant")
+bear_dir = os.path.join(os.sep, "tensorflow", "data", "bear")
 
 # Get the animal directory
 cats = os.listdir(os.getcwd() + cats_dir)
